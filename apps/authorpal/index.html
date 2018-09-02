@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--
+Copyright {2017} {Trey Russell, Lycelia Studios}
+Other contributors: Knochenmark, Octopinky
+See FAQ page for link to license info.
+-->
+<html>
+<head>
+  <title>AuthorPal</title>
+  <script src='https://lycelia.com/lib/D.js'></script>
+  <link rel="shortcut icon" type="image/x-icon" href="icons/favicon.ico">
+  <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <link id = 'font-awesome' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <script>
+  // Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/append()/append().md
+  (function (arr) { //polyfill append
+    arr.forEach(function (item) {
+      if (item.hasOwnProperty('append')) {
+        return;
+      }
+      Object.defineProperty(item, 'append', {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: function append() {
+          var argArr = Array.prototype.slice.call(arguments),
+            docFrag = document.createDocumentFragment();
+
+          argArr.forEach(function (argItem) {
+            var isNode = argItem instanceof Node;
+            docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+          });
+
+          this.appendChild(docFrag);
+        }
+      });
+    });
+  })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
+    window.TS = {
+      data: {},
+      events: {},
+      refs: {},
+      html: {
+        modals: {},
+        display: {
+          lineBody: {},
+          splash: {}
+        },
+        _navBars: {},
+        menu: {}
+      },
+      js: {
+        templates: {},
+        export: {}
+      },
+      lib: {},
+      css: {},
+      cssTemplates: {}
+    }
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js' defer></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.js' ></script>
+  <script>
+  {
+    let x = 0;
+    let loaded = function() {
+      if (x == scripts.length)
+      TS.start(document.querySelector('#root'));
+    }
+    let scripts = [
+      "javascripts/html/modals/fileContextNav.js",
+      "javascripts/html/display/splash/main.js",
+      "javascripts/js/export/blog.js",
+      "javascripts/js/export/json.js",
+     "javascripts/html/display/lineBody/callEditor.js",
+    "javascripts/html/display/splash/js.js",
+    "javascripts/start.js",
+    "javascripts/js/templates/Example files.js",
+    "javascripts/js/export/webcomponentJS.js",
+    "javascripts/js/clipboard.js",
+    "javascripts/js/templates/novel outline.js",
+    "javascripts/js/export/website_JS.js",
+    "javascripts/js/export/exportHandler.js",
+    "javascripts/html/navBars/navBars.js",
+    "javascripts/html/navBars/file_button.js",
+    "javascripts/html/display/splash/splash_html.html",
+    "javascripts/html/display/splash/files_js.js",
+    "javascripts/html/navBars/toggleSite_button.js",
+    "javascripts/js/templates/templates.js",
+    "javascripts/js/highlight.js",
+    "javascripts/js/templates/html5.js",
+    "javascripts/html/display/lineBody/handler.js",
+    "javascripts/js/indexedDB.js",
+    "javascripts/html/modals/modals.js",
+    "javascripts/html/modals/trash.js",
+    "javascripts/html/display/html.js",
+    "javascripts/html/display/titleBar.js",
+    "javascripts/css.js",
+    "javascripts/js/js.js",
+    "javascripts/cssTemplates/default.css",
+    'javascripts/cssTemplates/midnight.js',
+    'javascripts/lib.js'
+    ]
+    let holder = document.createDocumentFragment()
+    scripts.forEach(ele=> {
+      let script = Object.assign(document.createElement('script'), {
+        src: ele,
+        onload: function() {loaded(++x)}
+      })
+      holder.appendChild(script)
+    })
+    document.head.append(holder)
+  }
+
+  </script>
+<body style='display: flex; flex-direction: column; height: 100%;'>
+  <div id='root'></div>
+  <style>
+    html, body{
+      font-family: SourceSansLocal,source-sans-pro,Source Sans Pro,-apple-system,Roboto,pt sans,calibri,sans-serif;
+      width:100%;
+      height:100%;
+      margin:0;
+      position:relative;
+      font-size: 1rem;
+      color:white;
+    }
+  </style>
+  <script>
+    marked.setOptions({
+      breaks: true
+    })
+  </script>
+</body>
+</html>

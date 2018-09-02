@@ -1,0 +1,109 @@
+v B.87 -- new card "Research Electric Eels". Strong Fort upgrades now available.<br>
+v B.86 -- added new card "Rite of greed". assorted tweaks.<br>
+v B.85 -- added new card "Terror of the Deep". new fortress "Sand Castle" + upgrades. Allowed AI to cast a bunch more spells with tiny degree of smartness. Increased quest difficulty by pre-upgrading some bases for AI to stop cannon ball spam. Temporarily disabling multiplayer. Changed mid-square resource gains to improve over time.<br>
+v B.80 -- added bunch of new upgrades for basic fort and long fort. new cards "tsunami" (first item to change land type) and "whirlpool". Two new campaign instances "Capetown" and "Leviathan". Allowed for multiple card upgrade options. Some graphics tweaks. Started audio settings.<br>
+v B.75 -- added more spells to AI. New card:
+v B.74 -- new campaign instance "Bar Island" <br>
+v B.73 -- new card "King Crab", changed evasion graphic to "resist" when armored rather than evasion. <br>
+v B.72 -- new card "Tsunami", first card able to change square's element. <br>
+v B.71 -- started adding ability to use spells to AI. <br>
+v B.70 -- new campaign area opening up at the ocean, new card "Rock Crab" , UI changes & fixes, server tweaks. <br>
+v B.64 music changes <br>
+v B.63 -- added new card: "Floating Castle". Added new campaign level "Mirage". Revised a few campaign levels to be more difficult and have higher card variety.
+v B.62 -- added new shop system w/level progression to unlock cards for buying. Added level-unlock system for quests. <br>
+v B.61 -- added "Desert Hawk", "Owl", and "Peacock" cards. <br>
+v B.60 -- first flying card "Vulture". Flying can only be hit by ranged units or units with Jump. More campaign music added.<br>
+v B.59 -- new mechanic: "Taunt" added to various wall cards.  New enemy selection ai, units now tend to target damaged units/taunt units first, w/element of randomness. <br>
+v B.58 -- quest screen overhaul <br>
+v B.57 -- more sounds added, variable volume sound for impacts. <br>
+v B.56 -- added sounds for some effects, silence is no more. <br>
+v B.55 -- UX changes. <br>
+v B.54 -- hopefully improved move animations. Minor board color changes.<br>
+v B.53 -- improved some artwork, reduced image size assets to improve load times.<br>
+v B.52 -- improved bounty screen UX slightly. added new card "Summon chipmunk"<br>
+v B.51 -- at long last, let there be move animation. <br>
+v B.50 -- improved deck editor, added new card "Stone Tower". Changed basic tower to Wood Tower, can upgrade. <br>
+v B.49 -- first AOE spell added! "Meteor Shower"<br>
+v B.48 -- can now cancel-cast spells. new spell card "Comet". fixed evasion glitch in multiplayer. <br>
+v B.47 -- added icons to card stats.  added new card "Harrowing Gaze", cuts creature unit hp by half. <br>
+v B.46 -- added new spell "Cast Ankleweight", slows enemy unit movement speed.<br>
+v B.45 -- improved attack animation & injured animation. Bug fixes. Rat level the ai now plays first.<br>
+v B.44 -- added new campaign instance. First instance to feature the AI playing first. <br>
+v B.43 -- added working searchbar to deck builder and store. Added Firefox support! possibly edge/safari too? <br>
+v B.42 -- new card "Pacifist Fort", generates a resource each turn but cannot attack.  Added graphics update, all units that generate resources at end of turn now show it on display and display totals update on time.  Fixed a big bug that was giving extra resources to human player when the ai mined resources (so now ai should be more of a challenge) <br>
+v B.41 -- fixed tutorial, various ui updates. <br>
+v B.40 -- Added new spell card "Happy Feet", color coded titles of spell/summon/build cards (feb 24, 2018)<br>
+v B.39 -- Added new card "Summon Stone Wall", improved animation and altered reward for mid-square ownership.<br>
+v B.38 -- changed regen/heal animation to show amount healed/regened. Fixed multiplayer terrain. Added new mechanic "Summon Sickness" -- currently only for upgrade mechanic, will apply to everything in another ten versions or so (slows down testing to apply it now). More image file size reductions<br>
+v B.37 -- UI fixes. bug fixes. New mechanic: "Upgrade Card" -- it's like "Evolve" but is used <i>after</i> the card is on the field. Upgrade mechanic added to "Clay Wall".  New card added "Brick wall"<br>
+v B.36 -- added basic death animation, improved injury animation. Removed some screen/card flicker. <br>
+v B.35 -- creatures now face left/right depending on who owns them. Major image size reductions should improve load time (>90% size reduction for some images)<br>
+v B.34 -- new campaign  instance "Survival Training"<br>
+v B.33 -- added land preference on certain campaigns. Smarter ai, can now evolve cards and cast buildings correctly.<br>
+v B.32 -- added "Summon Cactus Man", added evolve option to Cactus. <br>
+v B.31 -- added "Summon Cactus", added new mechanic "Barbed" <br>
+v B.30 -- changed "Upgrade" mechanic name to "Evolve", allowed towers/walls to be summoned on any allied square, simplified lands to only 4 (took out "air" lands), made lands clump more. <br>
+v B.29 -- added new card "Moss Troll", added multi-option upgrade mechanic, added moss troll upgrade to Summon Troll card,made minigame license info more apparent. (feb 18, 2018)<br>
+v B.28 -- added new card "Mountain Troll", added upgrade option for basic troll.<br>
+v B.27 -- Added new card "Troll", new mechanic "Regenerate" with accompanying animation <br>
+v B.26 -- added All Chat for multiplayer. Added chat filter for some swears.
+v B.25 -- added new card "Goblin Pillager" (feb 15, 2018)<br>
+v B.24 -- Added minigames. <br>
+v B.23 -- Fixed ai glitch. added usercount to multiplayer lobby. Added campaign level. Added new card "Summon Warpig" (feb 4th, 2018).
+<br>
+v B.22 -- Added campaign card rewards the first time a level is cleared. <br>
+v B.21 -- UI changes, DC/surrender detection added to multiplayer, Captcha added to signup registration to help ward off meddlesome robots.!update -- removed captcha, took too long! Stub code for new campaign section.<br>
+v B.20 -- added "Summon Gator" card (first card to get terrain bonus). Smoothed AI summoning/play.  Added card summoning anim.<br>
+V B.19 -- Fixed multiplayer chat. Added new campaign. Added card "Summon Scylla" <br>
+V B.18 -- Multiplayer now has chat.  Resource AI improved. (Feb 2nd, 2018)<br>
+V B.17 -- <br>
+v B.16 -- Multiplayer spells should all work as advertised now. Fixed creatures dodging heals (for reals this time). Added Refresh Lobby button. Old games from disconnected hosts will be removed from lobby now every few minutes. Added souls/turn base rate from 0 to 1. Added graphic to better show that controlling midpoints grants resources. Decreased price of Cannonball, Steel Worm, Solar Plant. Added linear gradient turn-indicator. <br>
+v B.16 -- Multiplayer now live (albeit buggy) Jan 16, 2018<br>
+v B.15 -- can now cancel-cast/summon, card/resources refunded. UI changes. Some progress on multiplayer option. <br>
+v B.14 -- added blood animation for cast spike. Added new card 'Strong Fort'. bug fixes, cards no longer disappear when missing resources to cast them.<br>
+v B.13 -- added cannon ball animation, including explosion.  Throwing axe animation, propagated arrow anim to other cards. <br>
+v B.12 -- added arrow & acorn projectiles, smoothed ranged animation. Took out gameboard scrolling and made cards auto-shrink to fit. Buffed Fanatic card. Stub code for multiplayer (.3% complete) (jan 6, 2018)<br>
+v B.11 -- added catapult card, took away wall attack (of 0), new campaign instance, fixed skeleton/skeleton archer, rebalanced long fort & a couple campaign fights, added more dialogue. <br>
+v B.10 -- added terrain, slight ui fix on deck editor, new card: Skeleton Archer (jan 4, 2018)<br>
+v B.09 -- added Skeleton card, added more dialogue text. (jan 3rd, 2018)<br>
+v B.08 -- major UI overhaul, mostly centered on game board. Better space usage. <br>
+v B.07 -- added custom game ending/introduction dialogue. Small UI fixes. <br>
+v B.06 -- Added images to all cards <br>
+v B.05 - Added Summon Turtle God card, added upgrade option to other turtle cards, rebalanced Ancient Turtle. <br>
+v B.04 - css changes, automatic login <br>
+v Beta.03 - UI changes, new splash page - July 6th, 2017<br>
+          v B.02 - added new quest, and new card "Summon Frog"; ui changes. Dropped Firefox support. July 4th, 2017<br>
+          v B.01 - added "Pillow Squirrel" intro quest, UI changes, help message.<br>
+          v A.35 - Now shows damage, melee attacks (sort of). <br>
+          v A.34 - Now shows who owns a square. Holding center squares grants bonuses. Now shows types/subtypes on cards.<br>
+          v A.33 - Now supports creating multiple decks, tracks if a quest was beaten <br>
+          V A.32 - Security enhancements for accounts.  Sped up database login. Added card "Summon Clay Soldier".  Updated deck editor UI. 05/14/2017 <br>
+          V A.31 - New card "Fanatic" attack power grows with each attack.  New Card "Build Steel Worm" mines .75 materia/turn.  Cards now display the bounty they give upon death. Tooltip on summoned cards improved  <br>
+          v A.30 - New campaign instance: A noise in the attic.  New card "Spark of Insight" draws two cards.
+          New long-ranged fortress card added(currently AI only)<br>
+          v A.29 - Deck editor and hand cards UI upgrade.<br>
+          V A.28 - New card "Spike" added, deals 20 damage to any unit.  Added Spike to starter deck. 05/09/17<br>
+          v A.27 - New card "Bandage" added, heals 25 hp on friendly creature cards. Added Spellcast animations 05/08/17<br>
+          v A.26 - New card "Summon Ancient Turtle", reduces damage taken by half. UI upgrades to shop/library  05/08/17<br>
+          v A.25 - Merry Quarter! Ranged attack anim added, hovertext added.  <br>
+          v A.24 - Added first graphic (for sunflower).  Armored bear now has special - reduce damage taken by 2; 05/07/17<br>
+          v A.23 - Improved ingame UI.  Easier to see resources.
+            Added status messages to inform if not enough resources and where to click to summon.  Upgraded lvl 1 foe<br>
+          v A.22 - No more disappearing cards (I hope).  Better Summon graphics. New starting deck.<br>
+          v A.21 - Bug fixes, better 'end turn' button behavior/look<br>
+          v A.20 - Big Update - game now has two lanes to attack through; 05/06/17<br>
+          v A.15 - Fancier splash page; added "Summon Clay Wall" card; 05/05/17 <br>
+          v A.14 - Added new card 'Summon Mouse'; reduced load lag.  05/04/17<br>
+          v A.13 - Game board now horizontal instead of vertical.HP now has colors. ID visual removed. Second move path created (not currently functional)(05/02/17)<br>
+          v A.12 - Improved log. <br>
+          v A.11 - Bounty system (materia/souls/energy rewards on kill units).  04/25/16 <br>
+          v A.10 - Added shuffling. Gold reward for wins.  04/22/16 <br>
+          v A.09 - pieces light up before moving on graphics lvl 0.  Added new card ('Build Solar Plant').  Rifleman movement glitch fixed.  03/16/16 <br>
+          v A.08 - Nerfed 'Summon Rat', changed campaign tab to allow for multiple AI encounters. Added card ('Summon Rifleman') - 03/12/16<br>
+          v A.07 - Added card ('Summon Basic Tower'), changed endgame alert, started setting up graphics options.  03/11/16 <br>
+          v A.06 - Added first spell ('Cast Cannonball').  03/09/16<br>
+          v A.05 - Upgrade button now functions. Added card (Summon Rabid Unicorn). Fixed shop duplicates - 03/07/16 <br>
+          v A.04 - Added new card (Sunflower, first Energy gatherer), added description for cards in hand on mouse hover <br>
+          v A.03 - Added two new cards (Armored Bear and Squirrel (ranged)), added ranged attack, changed G[0] graphics, weakened AI. <br>
+          v A.02 - Added two new cards, Summon Rabbit and Summon Turtle.  Assorted glitch-fixes. <br>
+          v A.01  -  Alpha version complete at last! Published... March 02, 2016? +- 2 days

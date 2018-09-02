@@ -1,0 +1,173 @@
+
+  C.templates.UI = function() {
+    return `
+    <input type="hidden" id="testChange" value="0">
+    <input type="hidden" id="testNext" value="0">
+    <input type="hidden" id="testMovement" value="0">
+    <input type="hidden" id="testAttack" value="0">
+    <input type="hidden" id="testEndmotion" value="0">
+    <input type="hidden" id="testStep" value="0">
+    <style scoped>
+      .resources {
+        display: flex;
+      }
+      .hovered {
+        position: absolute;
+        z-index: 2;
+        background-color: #1C1C1C;
+        color: #FAFAFA;
+      }
+      .handCard {
+        z-index:5;
+        display: inline-block;
+        position: relative;
+        width: 10%;
+        transition: all .4s;
+      }
+      .niceCard {
+        transform: rotateY(45deg);
+        box-shadow: 0px 0px 1rem 2rem rgba(60, 60, 40, .1) inset, 0rem 0rem .2rem .1rem black;
+        transition: transform .3s;
+      }
+      .cardOptions {
+        visibility: hidden;
+        bottom: 100%;
+        position: absolute;
+        z-index: 9999;
+      }
+      .handCard:hover {
+        transform: translate(-10%, -7rem) !important;
+        width: 9rem;
+        z-index:6;
+        transition: width .3s, transform .3s;
+      }
+      .handCard:hover .niceCard {
+        box-shadow: none;
+        transform: rotateY(0deg);
+        transition: transform .4s;
+        box-shadow: .1rem .1rem .4rem .2rem black;
+      }
+      .handCard:hover .cardOptions {
+        visibility: visible;
+      }
+      #displayReadout {
+        height: 150px;
+        overflow: scroll;
+        display: inline-block;
+        background-color: #D2D2D2;
+      }
+      #UIresources {
+        display:flex;
+        justify-content: center;
+        width:100%;
+      }
+      #UIresources flex {
+        flex-wrap: wrap;
+      }
+      #UIoutput {
+        width:71%;
+        max-width:71%;
+        padding-right:11%;
+        justify-content:flex-start;
+        display: inline-flex;
+      }
+      #graveDeckUI {
+        background-color: white;
+        display:flex;
+      }
+      #uiContainer img{
+        height:1.2rem;
+        width: 1.2rem;
+      }
+      #chatOutput {
+        max-height:5rem;
+        background-color: rgba(235,235,235,1);
+        overflow-y: scroll;
+        font-size: 1.1rem;
+        text-align:left;
+      }
+      #chatInput {
+        font-size:1rem;
+        background-color: rgba(235,235,235,.7);
+        border: none;
+        padding: .15rem;
+      }
+      #chatInput:focus {
+        background-color: white;
+      }
+    </style>
+    <!-- to later be repopulated with deck selection/randomization -->
+
+    <div style='vertical-align:text-top; display:flex;max-height:26vh;' id = 'uiContainer'>
+      <div style='width:29%'>
+        <div id='UIresources'>
+          <div id='displayResources'></div>
+        </div>
+        <button id="endTurn" class='btn' style='float:left;'>End Turn</button>
+        <button id='surrender' class='btn btnWarn' style='float:right;' onclick='C.events.surrender();' title='Surrender'><img src='images/icons/surrender.svg' style='height:1rem;width:1rem;'></button>
+        <div id = 'statusReadout' style='display:none;'></div>
+        <div id='chat'>
+          <input type='text' id='chatInput'>
+          <div id='chatOutput'></div>
+        </div>
+      </div>
+      <div id = 'UIoutput'><h2 style='text-align:center;'>Awaiting player 2...<h2></div>
+
+    </div>
+    <style>
+    @keyframes summonOption {
+      0%   {background:rgba(255,0,0,.4); left:0px; top:0px;}
+      25%  {background:rgba(125,0,175,.4); left:200px; top:0px;}
+      50%  {background:rgba(40,255,0,.4); left:200px; top:200px;}
+      75%  {background:rgba(0,0,255,.4); left:0px; top:200px;}
+      100% {background:rgba(255,0,0,.4); left:0px; top:0px;}
+    }
+    @keyframes castOption {
+
+      0%   {box-shadow: 0 0 .15rem .15rem pink }
+      25%  {box-shadow: 0 0 .15rem .20rem violet }
+      50%  {box-shadow: 0 0 .15rem .22rem red }
+      75%  {box-shadow: 0 0 .15rem .25rem purple }
+      100% {box-shadow: 0 0 .15rem .20rem orange }
+    }
+    @keyframes hintOption {
+
+      0%   {box-shadow: 0px 0px .15rem .15rem gold }
+      25%  {box-shadow: 0px 0px .15rem .20rem orange }
+      50%  {box-shadow: 0px 0px .15rem .22rem red }
+      75%  {box-shadow: 0px 0px 6px 6px pink }
+      100% {box-shadow: 0px 0px 5px 5px gold }
+    }
+    @keyframes flyHover {
+      0%   { transform: translateY(0vh); }
+      100% { transform: translateY(-1vh); }
+    }
+    .unit {
+      display: inline-block;
+      margin: .34rem .14rem;
+      position: relative;
+    }
+    .unitGraphic {
+      background-color: #111;
+    }
+    .mine  .unitGraphic {
+      border: .13rem solid rgba(0,255,0,.7);
+      border-radius: 5% 50% 50% 5%;
+    }
+    .mine  .unitGraphic.level2 {
+      border: .17rem ridge rgba(0,255,30,.8);
+      border-radius: 5% 50% 50% 5%;
+    }
+    .mine  .unitGraphic.level3 {
+      border: .17rem ridge rgba(0,255,60,.9);
+      border-radius: 5% 50% 50% 5%;
+    }
+
+    .not_mine  .unitGraphic {
+      border: .13rem solid rgba(255,0,0,.7);
+      border-radius: 5% 50% 50% 5%;
+      transform: scale(-1, 1)
+    }
+    </style>
+    `
+  }

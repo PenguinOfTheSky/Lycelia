@@ -1,0 +1,33 @@
+S.css.light = function() {
+  'use strict'
+  let str =  `
+  body {
+    background-color: #FAFAFA;
+  }
+  flex {
+    display: flex;
+  }
+  button {
+  }
+  .link {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+  }
+  .icon {
+    border: 0;
+    background-color: transparent;
+  }
+  .bgNav {
+    color: white;
+    background-color: #232323;
+  }
+  .bgNav div {
+    display: inline-block;
+  }
+  .bgNav .icon {
+    color: white;
+  }
+  `
+  return str;
+}

@@ -1,0 +1,42 @@
+
+C.templates.topNav = function() {
+  let str = `
+  <style>
+    #nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background-color: rgb(4,100,50);
+      padding-bottom:.1rem;
+    }
+    #nav > * {
+      margin: .1rem;
+      background-size:cover;
+    }
+    #nav button {
+      min-width:1.4rem;
+      min-height:1.4rem;
+    }
+    #goldDisplay {
+      color: gold;
+      vertical-align:middle;
+    }
+  </style>
+  <div id='nav' class='bg1'>
+
+    <button class = 'navButton' id = 'Lobby' style='background-image:url("images/icons/home.svg")' title='home'></button>
+    <button class = 'navButton' id = 'Store'>Buy Cards</button>
+    <button class = 'navButton' id = 'Library'>Card Library</button>
+    <button class = 'navButton' id = 'Campaign'>Play Campaign</button>
+    <button class = 'navButton' id = 'Multiplayer' style='display:none;'>Multiplayer</button>
+    <!--<button class = 'navButton' id = 'minigames'>Minigames</button>-->
+    <button  class = 'navButton' id = 'forum' style='display: none;'>Forum</button>
+    <!--<button class = 'navButton' id = 'Logout' style='background-image:url("images/icons/logOut.svg")' title='log out'></button>-->
+    <button class = 'navButton' id = 'settings' style='background-image:url("images/icons/gear.svg")' title='settings'></button>
+    <span style='margin-left:.45rem;font-weight: 700; text-shadow: 1px 1px 2px black;'><span id ='goldDisplay'></span><img src='images/coins.svg' style='height:1.4rem;width:1.4rem;vertical-align:middle;'> </span>
+
+  </div>
+  <div id='main_game' style = 'width: 100%;transition: background 1.5s ease-in-out; height:100%;display:flex;flex-flow:column;'></div> <!--transition not working -->
+  `
+  return str;
+}

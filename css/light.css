@@ -1,0 +1,70 @@
+body, button, select, input {
+  color: #050505;
+}
+body {
+  background-color: #F8F8F8;
+}
+button, .btn, select {
+  background-color: #FFF;
+  border: none;
+  box-shadow: 0px 0px .14rem .06rem rgba(0,0,0,1);
+}
+button:hover, .btn:hover, select:hover {
+  box-shadow: 0px 0px .25rem .1rem rgba(75,55,205,1);
+}
+button:active, .btn:active {
+  box-shadow: 0px 0px .25rem .1rem gold;
+}
+.btnWarn {
+  color: #C00;
+  background-color: #FDD;
+}
+.btnDanger {
+  color: #FFF;
+  background-color: #F00;
+}
+.btnNudge {
+  background-color: #0036ff;
+  color: white;
+}
+.btnSuccess {
+  background-color: #0F0;
+}
+.btnInfo {
+  background-color: rgb(68,255,204);
+  color: black;
+}
+.btnSubmit {
+  background-color: #fff700;
+}
+.link {
+  color: #34F;
+  text-decoration: underline;
+}
+.badLink {
+  color: #F43;
+  text-decoration: underline;
+}
+.chosenTab {
+  box-shadow:0px 0px .2rem .05rem #F55 inset;
+}
+.icon {
+  border: 0;
+  background-color: transparent;
+}
+.bgNav {
+  color: white;
+  background-color: #232323;
+}
+.bgNav div {
+  display: inline-block;
+}
+.bgNav .icon {
+  color: white;
+}
+.hidden {
+  display: none!important;
+}
+#topDiv, #bottomDiv {
+  background-color: #CFD;padding:.2rem;border: .2rem outset #555;
+}

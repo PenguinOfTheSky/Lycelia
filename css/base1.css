@@ -1,0 +1,19 @@
+S.css.base = function() {
+  'use strict'
+  let str =  `
+  html {
+    height: 100%;
+    font-size: 1rem;
+  }
+  body {
+    height: 100%
+    padding: 0;
+    margin: 0;
+    position: relative;
+  }
+  button {
+    cursor: pointer;
+  }
+  `
+  return str;
+}

@@ -1,0 +1,88 @@
+
+  C.templates.deckEditor_Template = function() {
+    return `
+    <style>
+      .aCard {
+        background: none;
+        display: inline-block;
+        /*border-style: solid;
+        border-color: rgba(0,0,0,.8);*/
+        box-sizing:border-box;
+        position: relative;
+        text-align:left;
+        cursor: pointer;
+        height: 4.3rem;
+        width: 9rem;
+        margin: .4rem;
+      }
+      .inFort {
+        box-shadow: 0px 0px 0px 2px gold;
+      }
+      .aCard:hover .cardFormat{
+        position: absolute;
+        z-index:1;
+        box-shadow: 0px 0px 2px 5px rgba(255, 255, 0, .2) inset, 1px 1px 5px 2px black;
+        border: 2px solid silver;
+      }
+      #otherCards {
+        box-shadow: 0px 0px 0px 2px black;
+        max-height: 80vh;
+        min-height; 200px;
+        margin-bottom: .2rem;
+        overflow: auto;
+      }
+      .cardFormat {
+        position: absolute;
+      }
+      #searchOtherCards {
+        border: 1px solid #111;
+        box-shadow: 0px 0px 1px 2px #777 inset;
+      }
+      #searchOtherCards:hover {
+        box-shadow: 0px 0px 1px 1px #FF7 inset;
+      }
+      #deckEditorCommands {
+        text-align: center;
+      }
+      #library_deck_current {
+        display: none;
+      }
+      #deckEditor_Container {
+        text-align:center;
+      }
+      #viewDeckCards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    </style>
+    <div id = 'deckEditor_Container'>
+      <b>Current Deck:</b>
+      <select id = 'listDecks'>
+      </select> <b><br>
+        <button class='btn btn-success' id = 'createNewDeck'>Create New Deck</button>
+        <input type='text' id ='newDeckName' style='width:8rem;'>
+      <div id = 'library_deck_current'>
+        <div id='deckEditorCommands'>
+          <!--<button class='btn btn-primary' id = 'chooseMainDeck'>Make this your default deck?</button>-->
+          <button class='btn' style='font-size:1.2rem;' id ='saveThisDeck'>Save Deck</button>
+          <div id='status'></div>
+        </div>
+        <div id='otherCards'>
+          <div style='text-align: center; font-size: 1.3rem;'><b>Library</b></div>
+          <form style='text-align:center;' id='searchLibrary'>
+            <label>Search:
+              <input type='text' name ='search' placeholder='building/creature/summon/fortress/etc' >
+            </label>
+            <button type='submit'><icon class='fa fa-search'></icon></button>
+          </form>
+          <div id='viewOtherCards'></div>
+        </div>
+        <div id = 'deckCards'>
+          <div style='text-align: center; font-size: 1.3rem;'><b>Cards In Deck</b></div>
+          <div id = 'viewDeckCards'></div>
+        </div>
+      </div>
+    </div>
+    `
+  }

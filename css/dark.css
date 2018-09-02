@@ -1,0 +1,61 @@
+body, button, select, input {
+  color: #F3F3F3;
+}
+button, .btn, input {
+  margin: .1rem;
+  background-color: #000;
+  border: none;
+  box-shadow: 0px 0px .1rem .03rem rgba(255,255,255,.55);
+}
+button:hover, .btn:hover {
+  box-shadow: 0px 0px .1rem .05rem rgba(105,55,255,1) inset;
+}
+button:active, .btn:active {
+  box-shadow: 0px 0px .2rem .05rem gold;
+}
+.btnWarn {
+  background-color: #511;
+}
+.btnDanger {
+  background-color: #511;
+}
+.link {
+  color: #3F5;
+  text-decoration: underline;
+}
+.chosenTab {
+  box-shadow:0px 0px .2rem .05rem #FFF inset;
+}
+.bg0 {
+  background-color: #000;
+}
+.bg1 {
+  background-color: #222;
+}
+.bg2 {
+  background-color: #040404;
+}
+.bg3 {
+  background-color: rgba(0,0,70,.5);
+}
+.hidden {
+  display: none!important;
+}
+.border0 {
+  padding: .2rem;
+  box-shadow: 0px 0px .2rem .05rem silver inset;
+}
+.border1 {
+  padding: .13rem;
+}
+.border2 {
+  padding: .09rem;
+}
+.border3 {
+  box-shadow: 0px 0px .1rem .04rem #FFF ;
+}
+icon.fa {
+  background-color: #000000;
+  border: .09rem solid #000;
+  color: #DDD;
+}

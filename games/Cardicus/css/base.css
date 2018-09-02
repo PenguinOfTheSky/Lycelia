@@ -1,0 +1,66 @@
+input, select, button {
+  font-size: 1rem;
+}
+body {
+  padding: 0px;
+  margin: 0;
+  min-height:100%;
+  width:100%;
+}
+flex {
+  display: flex;
+}
+screenplay {
+  display: block;
+  max-width:32rem;
+  width:90%;
+  margin: 0 auto;
+  padding: .7rem;
+  margin-top: .3rem;
+  border-radius: 1rem;
+}
+::-webkit-scrollbar {
+    width: .5rem;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #111;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #aaa;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+screenplay h1 {
+  text-align:center;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size:1.8rem;
+}
+screenplay h2 {
+  text-align: left;
+  margin-top: .9rem;
+  margin-bottom: .9rem;
+}
+screenplay h3 { /*dialogue*/
+  text-align: center;
+  margin-bottom: 0rem;
+  font-size:1.4rem;
+  font-family: 'Ranga', cursive;
+}
+screenplay h4 { /*screen directions*/
+  text-align: right;
+}
+screenplay say {
+  text-align:center;
+  font-family:"Comic Sans MS", cursive, sans-serif;
+  display: block;
+  margin-left:15%;
+  margin-right:15%;
+}
+screenplay p {
+}

@@ -1,0 +1,76 @@
+C.html.log = function() {
+  return `
+  <style>
+    @import url('stylesheets/base.css');
+    #host {
+      padding: 2%;
+      text-align: center;
+    }
+    #logText {
+      word-wrap: break-word;
+      word-break: break-all;
+      text-align: left;
+      height: 12rem;
+      overflow-y: scroll;
+    }
+    #logView {
+      background-color:rgb(255,250,255);
+      padding:.15rem;
+      border-radius:5px;
+      display:none;
+      text-align:left;
+      border: 1px solid black;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    #logInfo {
+      display: none;
+    }
+    p {
+      text-indent: 1rem;
+    }
+
+  </style>
+<div id='host'>
+  <h1 style="font-family: 'Risque', cursive; font-size:4.2rem;-webkit-margin-before: 0.3rem;
+    -webkit-margin-after: 0.67rem;text-shadow: -.1rem 0 black, 0 .1rem red, .1rem .1rem purple, 0 -.1rem red;letter-spacing:.33rem;"><b>Cardicus vB.87</b></h1>
+  <h2 style="font-family: 'Ranga', cursive;font-size:2.3rem;margin-top:1vh;-webkit-margin-before: 0.4rem;
+    -webkit-margin-after: 0.67rem;"> A Strategy Card Defense Game </h2>
+    <a href='https://ko-fi.com/E1E89L64' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+    <div id ='logInfo'>
+        <p style='white-space: pre-line'>
+          Creator: Trey Russell, Lycelia Studios
+          <a href = 'http://www.lycelia.com'> Lycelia Homepage </a>
+        </p>
+        <p> Beta has arrived!
+          Cardicus is a free to play game under constant development.
+        </p>
+        <h3>Patch Notes</h3>
+        <p id = 'logText'></p>
+
+    </div>
+
+    <div>
+      <a href='tutorial.html' target='_blank' class='link'><button class = 'btn btnInfo btnLarge'><b>Tutorial/Guide</b></button></a>
+      <button class = 'btn btnInfo btnLarge' style=''id ='revealInfo'>
+        <b>Updates</b></button>
+
+
+      <div id = 'logView' >
+        <div style='float:right;'>
+          <button class='btn btnWarn' id = 'hideLogView'>X</button></div>
+        <div id = 'logViewMain'></div></div>
+    </div>
+    <div id='login_Container' style='display:none;'></div>
+    <div><a href='http://localhost:4000/Cardicus/tutorial.html#_Credits'>See Credits</a>
+    </div>
+    <div style='background-color: rgba(0,0,255,.4); margin: 0 auto; display: inline-block;padding:.5rem;'>
+      <span style='display:block'>Sponsored Content:</span>
+      <a target = '_blank' href='https://go.oclasrv.com/afu.php?zoneid=1591412'>See what dreams are made of</a><br>
+      <a target = '_blank' href='https://publishers.propellerads.com/#/pub/auth/signUp?refId=Tlv5'>Learn how to monetize your site or web-app</a>
+
+    </div>
+  </div>
+  `
+
+}

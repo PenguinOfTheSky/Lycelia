@@ -1,0 +1,78 @@
+#topNav {
+  background-color: #eb8667;
+  padding:.09rem;
+}
+body {
+  background-color: #faf0d0;
+}
+button, select, input {
+  color: #050505;
+}
+button, .btn {
+  background-color: #FbFbFF;
+  border: none;
+  box-shadow: 0px 0px .1rem .03rem rgba(0,0,0,.55);
+}
+button:hover, .btn:hover {
+  box-shadow: 0px 0px .1rem .05rem rgba(75,55,205,1);
+}
+button:active, .btn:active {
+  box-shadow: 0px 0px .2rem .05rem gold;
+}
+.btnWarn {
+  color: #C00;
+  background-color: #FDD;
+}
+.btnDanger {
+  color: #FFF;
+  background-color: #F00;
+}
+.btnSubmit {
+  background-color: #69f858;
+}
+.btnInfo {
+  background-color: #fff9d0;
+}
+.link {
+  color: #34F;
+  text-decoration: underline;
+}
+.badLink {
+  color: #F43;
+  text-decoration: underline;
+}
+.hidden {
+  display: none!important;
+}
+article {
+  background-color: #FBFBFB;
+  border-radius:.4rem;
+  margin-top:.1rem;
+  box-shadow: .05rem .05rem .2rem .1rem black;
+  max-width:40rem;
+}
+.moduleMap {
+  max-width:100%;
+  overflow: auto;
+  border: .1rem solid black;
+  border-collapse: collapse;
+}
+.moduleMap tr {
+  border: .1rem solid black;
+}
+.moduleMap td {
+  border: .1rem solid black;
+  cursor: pointer;
+}
+.moduleMap .incomplete {
+  background-color: #FCC;
+}
+.moduleMap .complete {
+  background-color: #BCF;
+}
+.moduleMap td:hover {
+  background-color: #CCF
+}
+.shine {
+  box-shadow:0 0 .2rem .3rem #ff00ef;
+}

@@ -1,0 +1,12 @@
+@keyframes levelWinPortal {
+  0% {filter: hue-rotate(0deg);}
+  25%   {filter: hue-rotate(90deg);}
+  50%  {filter: hue-rotate(0deg);}
+  75% {filter: hue-rotate(-90deg);}
+  100% {filter: hue-rotate(0deg);}
+}
+@keyframes targetingSkill {
+  0%   {background-color: rgba(0,0,0,.5);}
+  48%  {background-color: transparent;}
+  75% {background-color: red;}
+}

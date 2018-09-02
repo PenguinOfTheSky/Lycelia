@@ -1,0 +1,135 @@
+:root {
+  --tileSize: 11vh;
+  --mainSize: 100vh;
+}
+html {
+  font-size: 1rem;
+  height: 100%;
+  background-color: #333;
+}
+body {
+  max-height:100%;
+  overflow:hidden;
+}
+button {
+
+}
+.btnSubmit {
+  background-color: rgb(233, 203, 133);
+}
+.tile {
+  width: var(--tileSize);
+  height: var(--tileSize);
+  position: absolute;
+  /*box-shadow:0 0 .3vh rgba(0,0,0,.5) inset;*/
+  border-radius: 10%;
+}
+.earth {
+  background-image:url(../images/earth.svg);
+  background-size:100% 100%;
+}
+.earth_stone {
+  background-image:url(../images/earth_stone.svg);
+  background-size:100% 100%;
+}
+.levelExit {
+  background-color: gold;
+}
+.unit {
+  width: calc(var(--tileSize)*.9);
+  height: calc(var(--tileSize)*.9);
+  margin-left: calc(var(--tileSize)*.05);
+  margin-top: calc(var(--tileSize)*.05);
+  position: absolute;
+  z-index: 2;
+  border-radius:25%;
+  transition: all .25s ease-in-out;
+  filter: drop-shadow(1px 1px 2px black);
+}
+#tileAreaContainer {
+  height:var(--mainSize);
+  width: var(--mainSize);
+  overflow:hidden;
+  background-color:#111;
+}
+#tileArea {
+  height:var(--mainSize);
+  width: var(--mainSize);
+  transition: .25s linear all;
+
+}
+
+#textOutput {
+  color: #FDFDFD;
+  bottom:0;
+  font-weight:700;
+  position:absolute;
+  height:15%;
+  text-shadow: 1px 1px 3px black;
+  padding:5px;
+  padding-left:1.5vw;
+  padding-right: 1.5vw;
+  overflow:none;
+  text-indent:1rem;
+  pointer-events:none;
+}
+#textOutput > div {
+  max-width:calc(var(--mainSize) - 3vw);
+}
+.skillButton {
+  color:white;
+  font-weight:700;
+  height: 1.5rem;
+  border-radius: .25vh;
+  box-shadow: 2px 2px 5px 5px black;
+}
+#skillbar {
+
+  display:flex;
+  justify-content:center;
+  flex-direction:column;
+  height:50vh;
+}
+
+#main {
+  background-color:beige;
+}
+#textOutput {
+  z-index:11;
+}
+#circleVision {
+  height:var(--mainSize);
+  width: var(--mainSize);
+  left:0;
+  top: 0;
+  position:absolute;
+  z-index:5;
+  pointer-events:none;
+  background: radial-gradient(rgba(0,0,0,0) 65%,#111 84%);
+}
+#botUI {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+}
+#skillMenuStatus {
+  color: gold;
+  font-weight:1000;
+}
+#statContainer {
+  display: flex;
+  flex-wrap: wrap;
+  max-width:10rem;
+  justify-content: space-between;
+}
+.unit.item {
+  filter: drop-shadow(3px 3px 5px blue);
+  z-index:1;
+}
+.btn, button {
+  background-color: #FFF;
+}
+.btnWarn {
+  color: #900;
+}

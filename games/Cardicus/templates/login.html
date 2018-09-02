@@ -1,0 +1,45 @@
+C.html.login = function() {
+  return `
+  <style>
+  </style>
+  <button id ='showLogin_button' class='btn btnLarge'><b>Login</b></button>
+  <form id ="login_Form" class ='bg2' style='display: none;'>
+    <h2>Sign in</h2>
+    <div>
+        <label><b>Username:</b></label>
+        <input type="text" name="username" id ='user'>
+    </div>
+    <div>
+      <label><b>Password:</b></label>
+      <input type="password" name="password" id = 'pass'>
+    </div>
+    </div>
+    <div id = 'statusLogin'></div>
+<input type='submit' id='submitLogin' class = 'btn btnSubmit' value='Submit'>
+</form>
+<button id ='showCreateAccount_button' class='btn btnLarge'><b>Create Account</b></button>
+<form id='createAccount' class='bg2' style='display: none;'>
+  <h2>Create New Account</h2>
+  <div id='signupCoinhive' style='display:none;' class="coinhive-captcha" data-hashes="256" data-key="
+w9CyhymwMHHIKzUmWglVdgsMgtU9c2By" data-whitelabel="true"
+		data-callback="coinhiveSignup">
+    <em>Loading Captcha...<br>
+    If it doesn't load, please disable Adblock!</em>
+  </div>
+  <div>
+      <label><b>Username:</b></label>
+      <input type="text" name="username" id ='user1' pattern="\\w+" title="letters/numbers/underscores only" required>
+  </div>
+  <div>
+      <label><b>Password: (optional)</b></label>
+      <input type="password" name="password" id = 'pass1'/>
+  </div>
+  <div>
+      <label><b>Email: (optional)</b></label>
+      <input type="email" name="email" id = 'email1'/>
+  </div>
+<input type='submit' value='Submit' class='btn btnSubmit logButton'>
+</form>
+  <div id = 'accountSuccess'></div>
+  `
+}

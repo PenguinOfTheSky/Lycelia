@@ -1,0 +1,9 @@
+./DB/*
+./bin/*
+/bin/www
+DB/*
+DB
+*.xcf
+*.wav
+*.aup
+*.au

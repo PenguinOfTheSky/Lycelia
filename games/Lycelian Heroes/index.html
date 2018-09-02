@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lycelian Heroes</title>
+  <script src='/lib/D.js'></script>
+  <script>
+  Object.assign(window, {
+    maps: {},
+    board: {
+
+    },
+    data: {
+      hero: {
+        isLooking: 0,
+        speed: .25,
+        jump: 200,
+        dir: [0,0, 0],
+        pos: [425, 425,0],
+        center: []
+      },
+      collision: [],
+      slowCollision: []
+    },
+    events: {}
+  })
+  </script>
+  <script src='events/footstep.js'></script>
+  <script src='startup/keyboard.js'></script>
+  <script src='events/hotkey.js'></script>
+  <script src='events/renderMap.js'></script>
+  <script src='maps/test.js'></script>
+  <link href='css/main.css' rel="stylesheet">
+</head>
+<body>
+  <div id='overlay'></div>
+  <div id='hero' class='unit'>
+    <div id='innerHero'></div>
+  </div>
+
+  <script>
+    events.renderMap('test')
+    D.find("body").onclick = function(e) {
+      let loc =[e.pageX, e.pageY]
+      let dir =  Math.atan2(loc[0] - data.hero.center[0], -(loc[1] - data.hero.center[1])) * 180 / Math.PI;
+      console.log(loc, data.hero.center, dir)
+    }
+    setInterval(function() {
+      let {left, right, up, down, jump, turnR, turnL} = keys
+      let oldPos = [data.hero.pos[0], data.hero.pos[1],data.hero.pos[2]]
+      let mod = 1;
+      if (data.hero.pos[2] > 0) {
+        mod = .5
+      }
+      if (turnR && !turnL) {
+        data.hero.isLooking += .05
+      }
+      if (turnL && !turnR) {
+        data.hero.isLooking -= .05
+      }
+      if (up) {
+        if (left || right) {
+          data.hero.dir[1] -= data.hero.speed * .8 * mod
+        }
+        else {
+          data.hero.dir[1] -= data.hero.speed * mod
+        }
+      }
+      if (down) {
+        if (left || right) data.hero.dir[1] += data.hero.speed * .8 * mod;
+        else data.hero.dir[1] += data.hero.speed * mod;
+      }
+      if (left) {
+        if (up || down) data.hero.dir[0] -= data.hero.speed *.8 * mod;
+        else data.hero.dir[0] -= data.hero.speed * mod;
+      }
+      if (right) {
+        if (up || down) data.hero.dir[0] += data.hero.speed *.8 * mod;
+        else data.hero.dir[0] += data.hero.speed * mod;
+      }
+      if (jump) {
+        if (data.hero.pos[2] == 0) data.hero.dir[2] = data.hero.jump
+        else data.hero.dir[2] += 5
+      }
+      if ( data.hero.pos[2] > 0) {
+        data.hero.dir = data.hero.dir.map(x => x * .94)
+      } else {
+        data.hero.dir = data.hero.dir.map(x => x * .9)
+      }
+      let slowColDetect = function() {
+        let loc = D.find('#hero').getBoundingClientRect()
+        loc.top2 = window.pageYOffset + loc.top
+        loc.left2 = loc.left + window.pageXOffset
+
+        let center = [loc.left2 + loc.width/2, loc.top2 + loc.height/2]
+        data.slowCollision.some((ele, i )=> {
+          if ((center[0] - ele.x)**2 + (center[1] - ele.y)**2 < (ele.radius + loc.width/2)**2 && data.hero.pos[2] < ele.height) {
+            if ((center[0] - ele.x)**2 + (center[1] - ele.y)**2 < ((ele.radius )**2)) {
+              data.hero.dir[0] *= ele.slow
+              data.hero.dir[1] *= ele.slow
+            } else {
+              data.hero.dir[0] *= (ele.slow +1)/2
+              data.hero.dir[1] *= (ele.slow +1)/2
+            }
+            return true;
+          }
+        })
+      }
+      slowColDetect();
+      data.hero.dir[2] -= 9.8
+
+      let bodyD = D.find('body').getBoundingClientRect()
+
+      data.hero.pos[0] += data.hero.dir[0]
+      data.hero.pos[1] += data.hero.dir[1]
+      data.hero.pos[2] += data.hero.dir[2]
+      if (data.hero.pos[2] < 0) {
+        data.hero.pos[2] = 0;
+        data.hero.dir[2] = 0;
+        if (oldPos[2] > 0) { //footstep check
+          events.footstep()
+        }
+      }
+      data.hero.center = [data.hero.pos[0] + board.size, data.hero.pos[1] + board.size]
+      if (data.hero.pos[2]> 0) {
+        D.find('#hero').style.transform = ` translate(${data.hero.pos[0]}px, ${data.hero.pos[1]}px) scale(${data.hero.pos[2]/8000 + 1}) rotate(${data.hero.isLooking}rad)`
+        D.find('#hero').style.boxShadow = `${-.5 - data.hero.pos[2]/1000}vh ${-.5 - data.hero.pos[2]/1000}vh 1vh rgba(0,0,0,.5)`
+      } else {
+        D.find('#hero').style.transform = ` translate(${data.hero.pos[0]}px, ${data.hero.pos[1]}px) rotate(${data.hero.isLooking}rad) `
+        D.find('#hero').style.boxShadow = `-.5vh -.5vh 1vh rgba(0,0,0,.5)`
+      }
+      let detectBox = function() {
+        let loc = D.find('#hero').getBoundingClientRect()
+        loc.top2 = window.pageYOffset + loc.top
+        loc.left2 = loc.left + window.pageXOffset
+        let shifted = false;
+        data.collision.forEach(ele => {
+          if (loc.left2 < ele.x + ele.width &&
+           loc.left2 + loc.width > ele.x &&
+           loc.top2 < ele.y + ele.height &&
+           loc.height + loc.top2 > ele.y)  {
+             if (!shifted) {
+               //write better collision. Angle detection. normals.
+               /*let centerBox = [ele.x + ele.width/2, ele.y + ele.height/2]
+               let normal = Math.atan2(centerBox[0] - data.hero.center[0], -(centerBox[1] - data.hero.center[1])) * 180 / Math.PI;*/
+
+               data.hero.pos[0] -= data.hero.dir[0] * 1.5
+               data.hero.pos[1] -= data.hero.dir[1] * 1.5
+               data.hero.dir[0] *= -.8
+               data.hero.dir[1] *= -.8
+             }
+             shifted = true;
+           }
+        })
+        //if (Math.random() > .99) console.log(x1, x2, diff, data.hero.pos[0], data.hero.pos[1])
+      }
+      detectBox()
+      let center = D.find('#hero').getBoundingClientRect()
+      window.scrollBy({
+          top: ((center.y + center.height/2) - window.innerHeight/2)/25,
+          left: ((center.x + center.width/2) - window.innerWidth/2)/25,
+      });
+
+    },17)
+    setInterval(function() {
+      if (data.hero.pos[2] != 0) return;
+      events.footstep()
+    },250)
+  </script>
+</body>
+</html>

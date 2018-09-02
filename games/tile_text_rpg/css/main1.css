@@ -1,0 +1,66 @@
+:root {
+  --tileSize: 11vh;
+}
+html {
+  font-size: 1rem;
+  height: 100%;
+  background-color: #333;
+}
+button {
+
+}
+.btnSubmit {
+  background-color: rgb(233, 203, 133);
+}
+.tile {
+  width: var(--tileSize);
+  height: var(--tileSize);
+  position: absolute;
+  box-shadow:0 0 .3vh rgba(0,0,0,.5) inset;
+  border-radius: 10%;
+}
+.earth {
+  background-color: brown;
+}
+.earth_marble {
+  background-color: grey;
+}
+.levelExit {
+  background-color: gold;
+}
+.unit {
+  width: calc(var(--tileSize)*.9);
+  height: calc(var(--tileSize)*.9);
+  margin-left: calc(var(--tileSize)*.05);
+  margin-top: calc(var(--tileSize)*.05);
+  position: absolute;
+  z-index: 2;
+  background-color: pink;
+  border-radius:25%;
+  transition: all .25s ease-in-out;
+}
+
+#textOutput {
+  color: #000;
+  bottom:0;
+
+  position:absolute;
+  overflow-y:auto;
+  height:25%;
+  padding:5px;
+  padding-left:1.5vw;
+  padding-right: 1.5vw;
+
+  text-indent:1rem;
+  background-color: #DFDFDF;
+}
+#textOutput > div {
+  max-width:40rem;
+}
+.bramble {
+  background-color: green;
+}
+#hero {
+  box-sizing:border-box;
+  border: 3px solid blue;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src='/lib/D.js'></script>
+  <script>
+    Object.assign(window, {
+      events: {},
+      mobs: {},
+      maps: {},
+      skills: {
+
+      },
+      engine: {},
+      cheats: {
+        buffHero: function(lvl) {
+          data.hero.lvl += lvl;
+          //data.hero.exp += 5;
+          data.hero.str += lvl;
+          data.hero.vit += lvl
+          data.hero.freeSkillPoints += lvl*2
+        }
+      },
+      data: {
+        isOpen: 'stats',
+        hero: {
+          isHero: true,
+          lvl: 1,
+          exp: 0,
+          expMod: function(lvl) {
+            let amt = 0;
+            amt += Math.floor(lvl + lvl**1.02)
+            return amt
+          },
+          freeStatPoints: 3,
+          freeSkillPoints: 0,
+          agi: 1,
+          str: 1,
+          vit: 1,
+          int: 1,
+          soul: 1,
+          cha: 1,
+          armor: 0,
+          mpMake: function() {
+            let amt = 0;
+            amt += (this.int*4) + this.soul + (this.lvl*3)
+            return amt;
+          },
+          hpMake: function(){
+            let amt = 0;
+            amt += (this.vit*4) + this.soul + (this.lvl*3)
+            return amt;
+          },
+          equipped: {
+            skills: {
+              "Nudge": 1
+            }
+          },
+          skills: {
+            "Nudge": {
+              lvl: 1,
+              exp: 0
+            }
+          }
+        },
+        json: {
+
+        }
+      }
+    })
+  </script>
+  <script src='skills/heroSkillReq.js'></script>
+  <script src='skills/lowLevel.js'></script>
+  <script src='events/events.js'></script>
+  <script src='events/showStats.js'></script>
+  <script src='events/showSkills.js'></script>
+  <script src='events/updateSkills.js'></script>
+  <script src='events/updateHero.js'></script>
+  <script src='events/hotkeys.js'></script>
+  <script src='engine/play.js'></script>
+  <script src='engine/createMob.js'></script>
+  <script src='engine/attrMake.js'></script>
+  <script src='engine/useSkill.js'></script>
+  <script src='engine/moveMobs.js'></script>
+  <script src='engine/loadMap.js'></script>
+  <script src='engine/removeDebuff.js'></script>
+  <script src='mobs/plants.js'></script>
+  <script src='mobs/inanimate.js'></script>
+  <script src='maps/intro1.js'></script>
+  <link href='/css/extensions.css' rel='stylesheet' type='text/css'></link>
+  <link href='/css/base.css' rel='stylesheet' type='text/css'></link>
+  <link href='css/main1.css' rel='stylesheet' type='text/css'></link>
+  <link href='css/animations.css' rel='stylesheet' type='text/css'></link>
+</head>
+<body>
+  <div id='topUI'>
+  </div>
+  <div id='main'>
+    <div id='tileAreaContainer'>
+      <div id='tileArea'></div>
+    </div>
+    <div id='circleVision'></div>
+    <div id='textOutput'></div>
+
+  </div>
+  <div id='botUI'>
+    <div id='skillbar'>
+      <div class='skillButton' id='skill1'></div>
+      <div class='skillButton' id='skill2'></div>
+      <div class='skillButton' id='skill3'></div>
+      <div class='skillButton' id='skill4'></div>
+      <div class='skillButton' id='skill5'></div>
+      <div class='skillButton' id='skill6'></div>
+    </div>
+    <div id='utilbar'>
+      <!--<button id='openSkillMenu' class='btn'>Skills<span id='skillMenuStatus'></span>
+      </button>-->
+    </div>
+    <div id='readout'></div>
+    <div id='stats'>
+      <div ><span id='freeStatPoints'></span> stat points to allocate</div>
+      <div ><span id='freeSkillPoints'></span> skill points to allocate</div>
+      <button id='openStats' onclick="data.isOpen='stats';events.updateHero()">Stats</button>
+      <button id='openSkills' onclick="data.isOpen='skills';events.updateHero()">Skills</button>
+      <button id='openNone' onclick="data.isOpen='none';events.updateHero()">hide</button>
+      <div id='heroInfoDisplay'></div>
+    </div>
+  </div>
+  <script src='start.js'></script>
+</body>
+</html>

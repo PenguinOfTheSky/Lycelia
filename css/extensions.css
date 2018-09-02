@@ -1,0 +1,27 @@
+flex {
+  display: flex;
+}
+inline-flex {
+  display: inline-flex;
+}
+icon {
+  text-align: center;
+}
+article {
+  text-align:center;
+  margin: 0 auto;
+  padding: .25rem;
+  max-width: 33rem;
+}
+article ul, article ol, article dl {
+  text-align: left;
+}
+article h1 {
+  font-size: 1.8rem;
+  -webkit-margin-before: .5rem;
+  -webkit-margin-after: .5rem;
+}
+article p {
+  text-indent: 1rem;
+  text-align:left;
+}

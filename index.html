@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123071255-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123071255-1');
+  </script>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="iconLib/favicon/favicon-32x32.png">
+  <!--<link rel="icon" type="image/png" sizes="16x16" href="iconLib/favicon/favicon-16x16.png">-->
+  <script>
+    if (top !== self) {
+      let msg = JSON.stringify({
+        redirect: window.location.pathname + window.location.search
+      })
+      parent.postMessage(msg, '*')
+    } else {
+      function receiveMessage (event){
+        try {
+          let msg = JSON.parse(event.data)
+          if (msg.redirect) {
+            if (location.href != msg.redirect) location.href = msg.redirect
+          }
+        } catch(err) {
+          console.log(err)
+        }
+      }
+      window.addEventListener("message", receiveMessage, false);
+    }
+  </script>
+<!--  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-2319349142950762",
+    enable_page_level_ads: true
+  });
+  </script> -->
+  <script src='lib/D.js'></script>
+  <script id="lzutf8" src="https://cdn.jsdelivr.net/npm/lzutf8/build/production/lzutf8.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/base.css">
+  <!--<link rel="stylesheet" type="text/css" href="css/light.css">-->
+  <link rel="stylesheet" type="text/css" href="css/extensions.css">
+
+  <script>
+  </script>
+  <title>Lycelia</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <script>
+    window.S = {
+      js: {
+
+      },
+      DB: {},
+      html: {
+
+      },
+      lib: {
+        ajax: {}
+      },
+      css: {},
+      data: {
+        local: {},
+        last: []
+      },
+      pages: {},
+      events: {}
+    }
+    let x = 0;
+    let loaded = function() {
+      if (x == scripts.length)
+      S.js.start();
+    }
+    let scripts = [
+      'store/js/start.js',
+      'lib/ajax.js',
+    /*  'css/base.css',
+      'css/light.css', */
+      'store/html/topNav.js',
+      'store/js/topNav.js',
+      'store/html/home.js',
+      'store/html/info.js',
+      'store/html/login.js',
+      'store/html/signup.js',
+      'store/html/account.js',
+      'store/html/search.js',
+      'store/html/awards.js',
+      'store/html/rating_span.js',
+
+      'store/js/info.js',
+      'store/js/loadIframe.js',
+      'store/js/loadAuthorPage.js',
+      'store/js/loadComments.js',
+      'store/events/view.js',
+      'store/events/load.js',
+      'store/events/msg.js',
+
+      'store/events/listen.js',
+      'store/events/grab.js',
+      'store/events/save.js',
+      'store/pages/createPage.js',
+      'store/pages/listPages.js',
+      'store/pages/profile.js',
+      'store/pages/none_Template.js',
+      'store/pages/book_Template.js'
+    ]
+    let holder = document.createDocumentFragment()
+    scripts.forEach(ele=> {
+      let script = Object.assign(document.createElement('script'), {
+        src: ele,
+        onload: function() {loaded(++x)}
+      })
+      holder.appendChild(script)
+    })
+    document.head.append(holder)
+  </script>
+</head>
+<body>
+
+<div style='opacity:.0001;position:absolute;z-index:-5;' id='crawler'>
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://lycelia.com",
+    "name": "Lycelia"
+  }
+</script>
+  <h1>Lycelia</h1>
+  <p>Community-made content, games, news</p>
+
+</div>
+  <div id='mainBody'></div>
+
+</body>
+</html>

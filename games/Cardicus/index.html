@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<!--
+Creator: Trey Russell
+Volunteer Contributors: Vishal G., Kenneth Malicay
+Beta Testers: Knochenmark, Psyperl
+-->
+<html style = 'font-size: 1rem'>
+<head>
+  <meta name="propeller" content="20ca077ee4cf030f9b08bddf23398f50">
+  <title>Cardicus</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+  <!--libraries-->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.2/localforage.min.js'></script>
+  <script src='https://lycelia.com/lib/D.js'></script>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel="stylesheet">
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js'></script>
+  <script src='https://code.jquery.com/jquery-2.2.0.js'></script>
+
+    <script src = 'campaign.js'></script>
+  <script>
+    if (localStorage.Lycelia_Cardicus) window.Card = JSON.parse(localStorage.Lycelia_Cardicus)
+    else {
+      window.Card = {
+        user: {
+
+        },
+        events: {
+        },
+        settings: {
+          volume: {
+            overall: .90,
+            music: .90,
+            ambient: .90,
+            sfx: .90
+          }
+        }
+      }
+    }
+    if (!Card.settings || !Card.settings.volume) {
+      delete localStorage.Lycelia_Cardicus
+      window.location.reload()
+    }
+    window.volume = Card.settings.volume
+    Card.events.save = function() {
+      localStorage.Lycelia_Cardicus = JSON.stringify(Card)
+    }
+    window.U = {} //utility functions
+    window.C = {//Cardicus
+      localDB: {},
+      audio: {},
+      templates:{},
+      events: {},
+      data: {
+        cardTitles: ``
+      },
+      html: {},
+      engine: {
+        input: {}
+      },
+      forum: {},
+      data: {
+        campaignList: {}
+      },
+      multiplayer: {}
+    }
+    window._allCards = {}
+    window.shadows = {}
+    window.imports = {}
+    window.imports._game = {}
+    let scripts = ['topNav',
+        'graphics/_graphics[0]', 'graphics/hint',
+
+        'player',
+        'library', 'U/U_Functions', 'U/longCardFormat', 'Engine_', 'login', 'deckEditor', 'graphics/formatCard', 'log',
+        'spells/spellBoss', 'spells/_spells', 'spells/spellAI',
+        'events/surrender', 'events/win', 'events/startCampaignGame', 'events/errorMsg', 'events/successMsg', 'events/message',
+        'data/_campaigns', "data/Eastbrook", 'data/journeyToMishalle', "data/introHints", 'data/Ocean',
+        'data/audioPointers/audio0',
+        "engine/attack", 'engine/Command', 'engine/movement', 'engine/Ownership', 'engine/Table', 'engine/_AI[easy]', 'engine/player1Multiplayer',
+        'engine/input/upgrade',
+        "cheats",
+        'forum',
+        'multiplayer/lobby', 'multiplayer/hostGame', 'multiplayer/joinGame', 'multiplayer/openGame'
+        ]
+    let htmlScripts = ['lobby.html', 'topNav.html', 'library.html', 'UI.html', 'login.html', 'log.html', 'deckEditor.html', 'campaignLister.js', 'settings.js']
+    for (let i = 0; i < scripts.length; i++) {
+      let s = document.createElement('script')
+      s.src = './javascripts/' + scripts[i] + '.js'
+      document.head.append(s)
+    }
+    for (let i = 0; i < htmlScripts.length; i++) {
+      let s = document.createElement('script')
+      s.src = './templates/' + htmlScripts[i]
+      document.head.append(s)
+    }
+
+    //Load
+  {
+    C.events.loadStart = function() {
+      localforage.getItem('cardicus', function(err, obj) {
+        if (err || !obj.cards){
+           //console.log(err);
+           window.account = {
+             "username": 'Hero',
+             "campaigns": [],
+             "gold": 200,
+             "cards": [
+               4,
+               6,
+               3,
+               4,
+               7,
+               0,
+               8,
+               18,
+               2,
+               5,
+               15,
+               17,
+               50
+             ],
+             "graphicsLevel": 0,
+             "currentDeck": "first",
+             "decks": [
+               {
+                 "base": 2,
+                 "deck": [
+                   4,
+                   6,
+                   3,
+                   4,
+                   7,
+                   0,
+                   8,
+                   18,
+                   5,
+                   15,
+                   17,
+                   50
+                 ],
+                 "name": "first"
+               }
+             ],
+             "key": undefined
+           }
+           return;
+         } else {
+           window.account = obj
+         }
+      })
+    }
+    C.events.save = function() {
+      localforage.setItem('cardicus', account)
+      hero = undefined;
+    }
+  }
+  C.events.loadStart()
+  setInterval(function() {
+    C.events.save()
+  },10000)
+  </script>
+  <script src='objects/_allCards.js'></script>
+  <script src='objects/cards50+.js'></script>
+  <script src='minigames/menu.js'></script>
+  <script src='templates/buyCards.js'></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Ranga|Risque" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/base.css">
+  <link rel="stylesheet" type="text/css" href="css/events.css">
+  <link rel="stylesheet" type="text/css" href="css/colors.css">
+</head>
+<body>
+  <script >
+    'use strict'
+    {
+      window.onload = function() {
+        setTimeout (function () {
+          scrollTo(0,0);
+        }, 100);
+        setTimeout(function() {
+          window.json = {}
+          Object.keys(_allCards).forEach(ele=> {
+            _allCards[ele].modifier = _allCards[ele].modifier.toString()
+            _allCards[ele].id = +ele
+          })
+          for(let x in _allCards) {
+            C.data.cardTitles += "\n" + _allCards[x].id + ' ' + (_allCards[x].name)
+          }
+          {//new
+            D.find('#view').innerHTML += C.templates.topNav();
+            imports.topNav();
+          }
+          /*
+          if (!Card.user || !Card.user.username) {
+            document.querySelector('#view').innerHTML += C.html.log()
+            imports.log(D.find('#view'))
+          } else {
+            U.post( "/login", Card.user, function( data ) {
+              if (data.response != 'failure') {
+                window.account = data
+                account.login = Card.user
+                C.keypass = {user: Card.user.username, key: data.key}
+                D.find('#view').innerHTML += C.templates.topNav();
+                imports.topNav();
+              } else {
+                delete Card.user
+                Card.events.save()
+                window.reload()
+              }
+            }, function () {
+              delete Card.user
+              Card.events.save()
+              window.reload()
+            }, {
+              responseType: 'json'
+            })
+          }*/
+        }, 4)
+      }
+    }
+  </script>
+  <style>
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    height:100%;
+  }
+  body {
+    font-size: 1rem;
+    background-color: #fdf3e7;
+  }
+  button {
+    font-size:1rem;
+  }
+  </style>
+<div id = 'view' style = 'width: 100%; min-height:100%;height:100%;display:flex;flex-flow:column;'>
+</div>
+  <div style='display:none;'><!--google SEO-->
+    <h1><b>Cardicus</b></h1>
+    <h2> A Strategy Card Defense Game </h2>
+    <p>Battle ferocious enemies with hordes of creatures and powerful spells at your fingertips. It's more than just a card game, it's <i>CARDICUS!</i></p>
+  </div>
+</body>
+</html>
+
+<!-- templates -->
+
+<template id = 'store'>
+<div id = 'store-main'>
+<div id = 'store-view'></div>
+</div>
+<style scoped>
+#store-main {
+  text-align:center;
+}
+</style>
+<script>
+  $('#store-view').html($('#buy-view').html())
+</script>
+</template>
+
+
+<template id = 'campaignStart'>
+  <style scoped>
+    #topBoard {
+      width: 100%%;
+      display: flex;
+      border-bottom: 3px ridge purple;
+      box-sizing: border-box;
+      height:50%;
+    }
+    #botBoard {
+      width: 100%%;
+      display: flex;
+      height:50%;
+      box-sizing: border-box;
+    }
+    .buildArea{
+      background-image: url('images/land/buildArea.jpg');
+      background-size: cover;
+      width: 50%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .base {
+      background-image: url('images/land/buildArea.jpg');
+      background-size: cover;
+      width: 50%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-self: center;
+    }
+    .move {
+      background-size: 100% 100%;
+      background-color: white;
+      width:100%;
+      padding: .05rem;
+    }
+    #moveContainer {
+      display: flex;
+      padding: 0px;
+      width: 100%;
+    }
+    #board5, #boardB5 {
+      box-sizing:border-box;
+      border: .14rem outset #333;
+    }
+  </style>
+  <div style = 'width: 100%; text-align:center;overflow:hidden;' id = 'boardArea'>
+  <div style='display:flex;height:74vh;'>
+    <div style='width: 14%; display: inline-flex;box-sizing: border-box;'>
+      <div class ='buildArea' id = 'board0'></div><br>
+      <div class='base' id ='board1'> </div>
+    </div>
+  <div id='move' style='width:74%; display: inline-block;box-sizing: border-box;'>
+    <div id = 'topBoard'>
+      <div class = 'move moveLeft' id = 'board2'></div>
+      <div class = 'move moveLeft' id = 'board3'></div>
+      <div class = 'move moveLeft' id = 'board4'></div>
+      <div class = 'move moveLeft' id = 'board5'></div>
+      <div class = 'move moveLeft' id = 'board6'></div>
+      <div class = 'move moveLeft' id = 'board7'></div>
+      <div class = 'move moveLeft' id = 'board8'></div>
+    </div>
+
+    <div id='botBoard'>
+      <div class = 'move moveRight' id = 'boardB2'></div>
+      <div class = 'move moveRight' id = 'boardB3'></div>
+      <div class = 'move moveRight' id = 'boardB4'></div>
+      <div class = 'move moveRight' id = 'boardB5'></div>
+      <div class = 'move moveRight' id = 'boardB6'></div>
+      <div class = 'move moveRight' id = 'boardB7'></div>
+      <div class = 'move moveRight' id = 'boardB8'></div>
+    </div>
+  </div>
+  <div style='width: 14%; display: inline-flex; box-sizing: border-box;'>
+    <div class = 'base' id = 'board9'></div>
+    <div class = 'buildArea' id = 'board10'></div>
+ </div>
+ </div>
+  <div id = 'UIarea'>
+  </div>
+</div>
+</template>

@@ -1,0 +1,38 @@
+button, select, input {
+  font-size: 1rem;
+}
+:root {
+  --main-font-color: rgb(250,250,250)
+}
+.bg1 {
+  background-color: rgb(0,100,50);
+  color: white;
+}
+.bg2 {
+  background-color: rgb(0,20,155);
+  color: white;
+}
+/*
+.btn {
+  color: white;
+  background-color: rgb(00,55,255);
+  margin: .1rem;
+  border-radius: .1rem;
+  border:none;
+  box-shadow: 1px 2px .1rem black;
+}*/
+.btn:hover {
+  box-shadow: 0 0 .1rem .2rem rgba(100,155,255, .4);
+}
+.btnWarn {
+  background-color: rgb(155,10,30);
+}
+.btnInfo {
+  background-color: rgb(50,155,255);
+}
+.btnLarge {
+  font-size: 1.3rem;
+  padding: .5rem;
+  width:13rem;
+  margin: .2rem;
+}

@@ -1,0 +1,29 @@
+
+C.templates.library = function() {
+  return `
+    <div class='row' id = 'library_container'><button class='btn btn-primary' id = 'buildEditDecks'>Build/Edit decks?</button>
+    <div >
+    <style >
+      #library_container {
+        text-align:center;
+      }
+      .libCard {
+        background-image: url('images/pattern1.svg');
+        background-size:contain;
+        display: inline-block;
+        border-style: solid; border-color: rgba(0,0,0,.8);
+        background-color:#444;
+        box-shadow: .02rem .02rem .1rem black;
+        margin: .15rem;
+        box-sizing:border-box;
+      }
+      .libCard {
+
+      }
+    </style>
+    All Your Cards: <br>
+    <div id = 'library_Library'>Loading...</div></div>
+
+    </div>
+  `
+}

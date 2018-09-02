@@ -1,0 +1,22 @@
+.dlList p{
+  margin-top: .1rem;
+  margin-bottom: .1rem;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+card {
+  display: inline-flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  margin: 0 auto;
+  width: 9rem;
+  height: 9rem;
+  background-color: #FEFFD8;
+  box-shadow: .1rem .1rem .25rem .1rem black;
+  margin: .3rem;
+}
+card img {
+  width: 90%;
+  margin: 0 auto;
+  height: 6.5rem;
+}

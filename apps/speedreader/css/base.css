@@ -1,0 +1,22 @@
+html {
+  height: 200%;
+}
+body {
+  height: 100%;
+  text-align:center;
+  padding: .5%;
+  font-size: 1rem;
+  overflow: auto;
+}
+button, select, input {
+  font-size: 1rem;
+  padding: .2rem;
+  margin: .1rem;
+  border-radius:.2rem;
+}
+.hidden {
+  display: none!important;
+}
+#output p {
+  margin: 0;
+}

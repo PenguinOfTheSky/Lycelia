@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src='https://lycelia.com/lib/D.js'></script>
+  <script>
+    Object.assign(window, {
+      events: {},
+      mobs: {},
+      engine: {},
+      data: {
+        json: {
+          'A1': {
+            introduction: `Your room is dusty and full of discarded clothes. That much is normal. The way the dirty clothes are moving on their own is worrisome.`,
+            start: [1,1],
+            tiles: {
+              0: {
+                1: {class: 'levelExit', onEnter: function(unit) {
+                  console.log('exiting')
+                }},
+              },
+              1: {
+                1: {class: 'earth_marble'},
+                2: {class: 'earth_marble', enterMsg: `You catch the scent of something foul.`},
+                3: {class: 'earth_marble'},
+              },
+              2: {
+                1: {class: 'earth'},
+                2: {class: 'earth', enterMsg: `You catch the scent of something foul.`},
+                3: {class: 'earth_marble'}
+              },
+              3: {
+                1: {class: 'earth'},
+                2: {class: 'earth', enterMsg: `You catch the scent of something foul.`},
+                3: {class:'earth_marble'}
+              },
+              4: {
+                1: {class: 'earth_marble'},
+                2: {class: 'earth_marble'},
+                3: {class: 'earth_marble'},
+              },
+              5: {
+                1: {class: 'levelExit'}
+              }
+            },
+            mobs: [
+              {name: "bramble", x: 2, y: 1, lvl: 1},
+              {name: "bramble", x: 2, y: 2, lvl: 1},
+              {name: "bramble", x: 3, y: 1, lvl: 1},
+              {name: "bramble", x: 3, y: 2, lvl: 1},
+              {name: "slime", x: 3, y: 3, lvl: 1, ms: .5}
+            ]
+          }
+        }
+      }
+    })
+  </script>
+  <script src='events/events.js'></script>
+  <script src='events/hotkeys.js'></script>
+  <script src='mobs/plants.js'></script>
+  <link href='https://lycelia.com/css/extensions.css' rel='stylesheet' type='text/css'></link>
+  <link href='https://lycelia.com/css/base.css' rel='stylesheet' type='text/css'></link>
+  <link href='css/main1.css' rel='stylesheet' type='text/css'></link>
+</head>
+<body>
+  <div id='topUI'></div>
+  <div id='main'>
+    <div id='tileArea'></div>
+    <div id='textOutput'></div>
+  </div>
+  <div id='botUI'>
+    <div id='skillbar'></div>
+    <div id='utilbar'>
+  </div>
+  <script src='start.js'></script>
+</body>
+</html>

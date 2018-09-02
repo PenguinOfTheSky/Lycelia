@@ -1,0 +1,39 @@
+.btn, button {
+  color: white;
+  cursor: pointer;
+  background-color: rgb(00,55,255);
+  margin: .1rem;
+  border-radius: .2rem;
+  border:none;
+  box-shadow: 1px 2px .1rem black;
+}
+.btn:hover, button:hover {
+  box-shadow: 0 0 .1rem .2rem rgba(100,155,255, .4);
+}
+.btnWarn {
+  background-color: rgb(255,50,50);
+}
+.btnInfo {
+  color: black;
+  background-color: rgba(40,244,223, .1);
+}
+.btnSubmit {
+  background-color: rgb(221,133,0);
+}
+.btnDisabled {
+  background-color: gray;
+}
+.btnDisabled:hover {
+  box-shadow: none;
+}
+.link {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+screenplay {
+  background-image: url('../images/scroll.jpg');
+  background-size:cover;
+  box-shadow: .05rem .05rem .3rem .1rem;
+
+}

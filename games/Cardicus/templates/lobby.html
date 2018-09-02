@@ -1,0 +1,12 @@
+C.html.lobby_HTML = function(){
+  let str = `
+  <div style = 'text-align: center;' class=''>
+    ${account.username ? `<h2 style = 'text-align: center;'> Welcome ${account.username} </h2>`: ''}
+    <p> To play a game, click campaign up top. <br>
+      Alter deck under card library tab <br>
+      Or buy new cards in the Store. <br>
+    </p>
+  </div>
+  `
+  return str;
+}

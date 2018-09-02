@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.js' ></script>
+  <script>
+
+    window.Uni = {
+      update: function(target, id, value) {
+        Uni.userData[target][id] = value
+        localStorage.LyceliaUniversity = JSON.stringify(Uni.userData)
+      },
+      events: {
+        msg: function(obj, callback) {
+          Uni.events.listen[Uni.data.n] = callback
+          obj.id = Uni.data.n++
+          obj.key = key;
+          window.parent.postMessage(JSON.stringify(obj), '*');
+        },
+        listen: {}
+      },
+      index: {
+        field: {},
+        subject: {},
+        class: {},
+        lesson: {},
+        path: {},
+        browse: {}
+      },
+      userData: {
+        completed: {}
+      },
+      data: {
+        local: {},
+        n: 1,
+        last: []
+      },
+      topNav: {},
+      home: {
+        json: {}
+      },
+      subjects: {
+        "Programming": {
+          json: {}
+        },
+        Math: {},
+        'Natural Sciences': {},
+        'Computer Science': {}
+      },
+      modules: {},
+      render: {}
+    }
+    try {
+      Object.assign(Uni.userData, JSON.parse(localStorage.LyceliaUniversity))
+    } catch(err) {
+      console.log(err)
+    }
+    try {
+      Object.assign(Uni.data.local, JSON.parse(localStorage.LyceliaStore))
+    } catch(err) {
+      console.log(err)
+    }
+
+    Uni.user = Uni.data.local.user
+    /*
+    let listen = function receiveMessage(event) {
+      try {
+        let data = JSON.parse(event.data)
+        Uni.events.listen[data.id](data)
+        delete Uni.events.listen[data.id]
+      } catch (err) {
+        console.log(err, event.data)
+      }
+    }
+    window.addEventListener("message", listen, 0)
+
+    var urlParams = new URLSearchParams(window.location.search);
+    try {
+      window.key = JSON.parse(urlParams.get('Lkey'))
+      window.name = urlParams.get('LyceliaUsername')
+    } catch(err) {}
+    Uni.events.msg({
+      target: 'data_sync',
+      run: 'read',
+    }, function(msg) {
+      if (Object.keys(msg.data).length == 0) {
+        Uni.events.msg({
+          target: 'data_sync',
+          run: 'update',
+          data: Uni.userData
+        }, function(msg){console.log(msg.data, 'bears')})
+      }
+    });
+    */
+  </script>
+  <title>Lycelia University</title>
+  <link rel="stylesheet" type="text/css" href="https://lycelia.com/css/base.css">
+  <link rel="stylesheet" type="text/css" href="https://lycelia.com/css/extensions.css">
+  <link rel="stylesheet" type="text/css" href="./css/colors.css">
+  <link rel="stylesheet" type="text/css" href="./css/base.css">
+  <script src='https://lycelia.com/lib/D.js'></script>
+  <script src='start/loader.js'>
+
+  </script>
+</head>
+<body class='bg0' style='box-sizing:border-box;'>
+  <div id='topNav'></div>
+  <div id='main'>
+  </div>
+</body>
+</html>

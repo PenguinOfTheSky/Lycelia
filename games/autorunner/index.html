@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autorunner</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.2/localforage.min.js'></script>
+  <script src='https://lycelia.com/lib/D.js'></script>
+  <script>
+  Object.assign(window, {
+    maps: {},
+    board: {
+
+    },
+    mobs: {},
+    data: {
+      scrHeight: window.innerHeight,
+      reset: function() {
+        Object.assign(data.hero, {
+          skills: {},
+          speed_up: .3,
+          speed_right: .2
+        })
+        data.hero.skills = {}
+
+      },
+      hero: {
+        map: 'test',
+        gc: 3,
+        hp: 2,
+        maxHp: 2,
+        isLooking: 0,
+        speed: .25,
+        speed_right: .2,
+        speed_up: .30,
+        jump: 200,
+        dir: [0,0, 0],
+        pos: [25, 425,0],
+        center: [],
+        canJump: false,
+        skills: {
+          doubleJump: false
+        }
+      },
+      collision: [],
+      slowCollision: []
+    },
+    events: {}
+  })
+  </script>
+  <script src='events/footstep.js'></script>
+  <script src='startup/keyboard.js'></script>
+  <script src='events/hotkey.js'></script>
+  <script src='events/renderMap.js'></script>
+  <script src='events/upgrades.js'></script>
+  <script src='maps/test.js'></script>
+  <script src='maps/lvl2.js'></script>
+  <script src='maps/lvl3.js'></script>
+  <script src='maps/lvl4.js'></script>
+  <script src='maps/lvl5.js'></script>
+  <script src='mobs/1.js'></script>
+  <script src='events/save.js'></script>
+  <link href='css/main.css' rel="stylesheet">
+</head>
+<body>
+  <div id='overlay'></div>
+  <div id='main'>
+  <div id='hero' class='unit'>
+    <div id='innerHero'></div>
+  </div>
+  </div>
+  <script>
+  setTimeout(function() {
+    window.scrollBy(-window.scrollX, 0)
+  },100)
+
+
+    D.find("body").onclick = function(e) {
+      let loc =[e.pageX, e.pageY]
+      let dir =  Math.atan2(loc[0] - data.hero.center[0], -(loc[1] - data.hero.center[1])) * 180 / Math.PI;
+      //console.log(loc, data.hero.center, dir)
+    }
+    let start = function() {
+      if (events.renderMap(data.hero.map)) {
+        events.renderMap('test')
+      }
+      let moveUnits = function(display) {
+        let mod = data.scrHeight/700
+        let frontDisplay = data.hero.pos[0] + window.innerWidth
+        let backDisplay = data.hero.pos[0] - window.innerWidth * .4
+        state.units.forEach((ele, i) => {
+          if (!ele) return;
+          if (ele.x < frontDisplay && ele.x > backDisplay) {
+            if (!display) {
+              if (ele.ai) {
+                if (ele.ai.walk) {
+                  ele.x -= ele.ai.walk * mod
+                }
+                if (ele.ai.hop) {
+                  ele.ai.hop.curr += ele.ai.hop.dir * mod
+                  if (ele.ai.hop.curr >= ele.ai.hop.max || ele.ai.hop.curr <=0) {
+                    ele.ai.hop.dir *= -1
+                  }
+                  ele.y -= ele.ai.hop.dir*board.size/100
+                }
+                if (ele.ai.linear) {
+                  ele.x += ele.ai.linear[0] * mod
+                  ele.y += ele.ai.linear[1] * mod
+                }
+              }
+            }
+            if (display) {
+              ele.updatePosition()
+              if(ele.offscreen) {
+                ele.offscreen = false;
+                setTimeout(function(){
+                  ele.ref.style.display = ''
+                },151)
+              }
+            } /*else if (data.resized) {
+              ele.updatePosition()
+            }*/
+
+          }
+
+        })
+      }
+      setInterval(function() {
+        if (data.isPaused == true) return;
+        let {left, right, up, down, jump, turnR, turnL} = keys
+        let oldPos = [data.hero.pos[0], data.hero.pos[1],data.hero.pos[2]]
+        if (data.hero.pos[0] > 9199) {
+          data.hero.gc += state.bounty
+          data.hero.map = window.state.nextMap
+          events.renderMap(window.state.nextMap)
+
+        }
+        let mod = data.scrHeight/700
+        /*if (data.hero.pos[2] > 0) {
+          mod = .5
+        }*/
+        if (turnR && !turnL) {
+          data.hero.isLooking += .05
+        }
+        if (turnL && !turnR) {
+          data.hero.isLooking -= .05
+        }
+        if (!up) {
+          data.jumpGrace = 0;
+        }
+        if (up) {
+          let n
+          let isGrounded
+          if (data.hero.pos[1] + data.hero.height  >= data.scrHeight *.96) {
+            data.hero.canJump = true
+            isGrounded = true
+            if (data.hero.skills.doubleJump) {
+              data.hero.skills.doubleJump.cd = false;
+            }
+          }
+          if (data.hero.canJump) {
+            data.hero.canJump = false;
+            if (!data.jumpGrace || isGrounded) {
+              n = 19
+              data.jumpGrace = 19;
+            } else {
+              n = data.jumpGrace+1
+              data.jumpGrace = (data.jumpGrace + 19)/2
+            }
+
+          } else {
+            if (data.jumpGrace>0) {
+              n = 1 + data.jumpGrace/1.5
+              data.jumpGrace -= .6
+            } else if (data.hero.skills.doubleJump && !data.hero.skills.doubleJump.cd) {
+              data.hero.skills.doubleJump.cd = true;
+              data.jumpGrace = data.hero.skills.doubleJump.max;
+            //  n = data.hero.skills.doubleJump.max
+              n=1
+            } else {
+              n = 1;
+            }
+          }
+          data.hero.dir[1] -= data.hero.speed_up/2 * mod * n
+        }
+        if (down) {
+          if (left || right) data.hero.dir[1] += data.hero.speed * .97 * mod;
+          else data.hero.dir[1] += data.hero.speed * mod;
+        }
+        if (left) {
+          if (up || down) data.hero.dir[0] -= data.hero.speed *.97 * mod;
+          else data.hero.dir[0] -= data.hero.speed * mod;
+        }
+        if (right || data.dashRight) {
+          if (data.dashRight > 0) {
+            data.dashRight -= .5
+          } else {
+            data.dashRight = 0;
+          }
+          data.hero.dir[0] += data.hero.speed_right * mod * (data.dashRight +1);
+        }
+
+        if (data.hero.pos[1] + data.hero.height < .96 * data.scrHeight && !data.hero.onLand) { //gravity
+          data.hero.pos[1] += 3.5 * mod * ((data.scrHeight - data.hero.pos[1])/data.scrHeight + 1)
+          data.hero.dir[1] += .12 * mod * ((data.scrHeight - data.hero.pos[1])/data.scrHeight + 1)
+          //if (Math.random() > .8) console.log(((data.scrHeight - data.hero.pos[1])/data.scrHeight + 1))
+        }
+        data.hero.onLand = false;
+        if (data.hero.pos[1] + data.hero.height > data.scrHeight *0.9602) {
+          data.hero.pos[1] = data.scrHeight *0.9620101 - data.hero.height
+        }
+        data.hero.dir = data.hero.dir.map(x => x * .9)
+
+
+
+        let slowColDetect = function() {
+          let loc = D.find('#hero').getBoundingClientRect()
+          loc.top2 = window.pageYOffset + loc.top
+          loc.left2 = loc.left + window.pageXOffset
+
+          let center = [loc.left2 + loc.width/2, loc.top2 + loc.height/2]
+          data.slowCollision.some((ele, i )=> {
+            if ((center[0] - ele.x)**2 + (center[1] - ele.y)**2 < (ele.radius + loc.width/2)**2 && data.hero.pos[2] < ele.height) {
+              if ((center[0] - ele.x)**2 + (center[1] - ele.y)**2 < ((ele.radius )**2)) {
+                data.hero.dir[0] *= ele.slow
+                data.hero.dir[1] *= ele.slow
+              } else {
+                data.hero.dir[0] *= (ele.slow +1)/2
+                data.hero.dir[1] *= (ele.slow +1)/2
+              }
+              return true;
+            }
+          })
+        }
+        //slowColDetect();
+        data.hero.dir[0] += .23 * mod
+
+
+        let bodyD = D.find('body').getBoundingClientRect()
+
+        data.hero.pos[0] += data.hero.dir[0]
+        data.hero.pos[1] += data.hero.dir[1]
+        data.hero.center = [data.hero.pos[0] + board.size, data.hero.pos[1] + board.size]
+        {
+          D.find('#hero').style.transform = ` translate(${data.hero.pos[0]}px, ${data.hero.pos[1]}px) rotate(${data.hero.isLooking}rad) `
+          /*D.find('#hero').style.boxShadow = `-.5vh -.5vh 1vh rgba(0,0,0,.5)`*/
+        }
+        let detectBox = function() {
+          let loc = D.find('#hero').getBoundingClientRect()
+          loc.top2 = window.pageYOffset + loc.top
+          loc.left2 = loc.left + window.pageXOffset
+          let shifted = false;
+          data.collision.forEach(ele => {
+            if (loc.left2 < ele.x + ele.width &&
+             loc.left2 + loc.width > ele.x &&
+             loc.top2 < ele.y + ele.height &&
+             loc.height + loc.top2 > ele.y)  {
+               if (!shifted) {
+                 //write better collision. Angle detection. normals.
+                 /*let centerBox = [ele.x + ele.width/2, ele.y + ele.height/2]
+                 let normal = Math.atan2(centerBox[0] - data.hero.center[0], -(centerBox[1] - data.hero.center[1])) * 180 / Math.PI;*/
+
+                 data.hero.pos[0] -= data.hero.dir[0] * 1.5
+                 data.hero.pos[1] -= data.hero.dir[1] * 1.5
+                 data.hero.dir[0] *= -.8
+                 data.hero.dir[1] *= -.8
+               }
+               shifted = true;
+             }
+          })
+          //if (Math.random() > .99) console.log(x1, x2, diff, data.hero.pos[0], data.hero.pos[1])
+        }
+        detectBox()
+        let detectUnits = function() {
+          let loc = {
+            y: data.hero.pos[1] + data.hero.height/10,
+            x: data.hero.pos[0] + data.hero.width/10,
+            width: data.hero.width*.8,
+            height: data.hero.height*.8
+          }
+
+          let shifted = false;
+          let backKillWidth = -board.size*18
+          state.units.forEach((ele, i) => {
+            if (!ele) return;
+            if (ele.x-loc.x < backKillWidth || ele.y > board.size*30) {//cull units
+              ele.ref.remove()
+              delete state.units[i]
+              return;
+            }
+            if (loc.x < ele.x + ele.width &&
+             loc.x + loc.width > ele.x &&
+             loc.y < ele.y + ele.height &&
+             loc.height + loc.y > ele.y)  {
+               if (ele.gemstone) {
+                 ele.ref.style.opacity = 0;
+                 ele.ref.style.filter = 'hue-rotate(180deg)'
+                 ele.ref.style.transform = ele.ref.style.transform + " scale(1.5) rotateY(180deg)"
+                 data.hero.gc += ele.gc || 1
+                 setTimeout(function() {
+                   ele.ref.remove()
+                 }, 100)
+                 delete state.units[i]
+                 data.hero.heartsUpdate()
+                 return;
+               }
+               if (!shifted) {
+                 //write better collision. Angle detection. normals.
+                 /*let centerBox = [ele.x + ele.width/2, ele.y + ele.height/2]
+                 let normal = Math.atan2(centerBox[0] - data.hero.center[0], -(centerBox[1] - data.hero.center[1])) * 180 / Math.PI;*/
+                 let hitDirMob
+                 if (((loc.y + loc.height)-ele.y) < ele.height/5) {
+                   if (ele.spikeTop) {
+                     hitDirMob = 'top'
+                     data.hero.pos[1] -= data.hero.dir[1] * 1 + 2
+                     data.hero.pos[0] -= data.hero.dir[0]
+                     data.hero.dir[0] *= .4
+                     data.hero.dir[1] *= .4
+                     data.hero.dir[1] -=board.size*.45
+                     data.hero.ref.classList.toggle('hit')
+                     setTimeout(function(){
+                       (data.hero.ref.classList.toggle('hit'))
+                     },100)
+                     data.hero.hp -= ele.impact || 1;
+                   } else {
+                     hitDirMob = 'top'
+                     if (ele.land) {
+                       data.hero.canJump = true;
+                       if (data.hero.skills.doubleJump) {
+                         data.hero.skills.doubleJump.cd = false;
+                       }
+                       data.hero.onLand = true;
+                       if (data.hero.dir[1] > 0) data.hero.dir[1] = 0;
+                     } else {
+                       ele.ref.classList.toggle('hit')
+                       data.hero.gc += ele.gc || 1
+                       data.hero.pos[1] -= data.hero.dir[1] * 1 + 2
+                       data.hero.pos[0] -= data.hero.dir[0]
+                       data.hero.dir[0] *= .4
+                       data.hero.dir[1] *= .4
+                       data.hero.dir[1] -=board.size*.45
+                     }
+                   }
+
+                 } else {
+                   if (ele.onlyAboveTouch) {
+                     return;
+                   }
+                   if (((loc.x + loc.width)-ele.x) < ele.height/3) {
+                     data.hero.pos[0]-=board.size*.75
+                   } else if (((loc.x + loc.width)-ele.x) > ele.height/3 *2) {
+                     data.hero.pos[0]+=board.size*.75
+                   }
+                   data.hero.pos[0] -= data.hero.dir[0] * 2
+                   data.hero.pos[1] -= data.hero.dir[1] * 1.5
+                   data.hero.dir[0] *= .4
+                   data.hero.dir[1] *= .4
+                   if (!ele.noHarm) {
+                     data.hero.ref.classList.toggle('hit')
+                     setTimeout(function(){
+                       (data.hero.ref.classList.toggle('hit'))
+                     },100)
+                     data.hero.hp -= ele.impact || 1;
+                   }
+
+                 }
+
+                 if(ele.indestructible ||(ele.indestructibleTop && hitDirMob == 'top')) {
+
+                 } else if ((!ele.bounceHp || ele.bounceHp <=1)) {
+                   ele.ref.style.opacity = 0;
+                   setTimeout(function() {
+                     ele.ref.remove()
+                   }, 100)
+                   delete state.units[i]
+                 } else {
+                   if (!ele.ref.className.includes('hit'))  {
+                     ele.ref.classList.toggle('hit')
+                   }
+                   setTimeout(function() {
+                     ele.ref.classList.toggle('hit')
+                   }, 100)
+                   ele.bounceHp -= 1
+                 }
+
+                 data.hero.heartsUpdate()
+               }
+               shifted = true;
+             }
+          })
+        }
+        detectUnits()
+
+
+        let center = D.find('#hero').getBoundingClientRect()
+        window.scrollBy({
+            /*top: ((center.y + center.height/2) - window.innerHeight/2)/25,*/
+            top:0,
+            left: ((center.x + center.width/2) - window.innerWidth/15)/50,
+        });
+        moveUnits(0)
+        D.find('#overlay').style.transform = `translateX(${data.hero.pos[0]/10000/10*100}%)`
+      },17)
+
+
+      setInterval(function() {
+        if (data.isPaused == true) return;
+        moveUnits(1)
+      },150)
+      setInterval(function() {
+        if (data.isPaused == true) return;
+        data.showDistance()
+      },250)
+    }
+
+    //startup
+    events.loadStart()
+    setTimeout(function() {
+      start()
+    },250)
+    setInterval(function() {
+      if (data.isPaused == true) return;
+      events.footstep()
+
+    },125)
+    setInterval(function() {
+      events.save()
+    },11000)
+  </script>
+</body>
+</html>

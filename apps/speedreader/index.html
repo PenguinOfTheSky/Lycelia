@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<!--
+  Copyright [2017] [Trey Russell] @ Lycelia
+-->
+<head>
+  <script src='/lib/D.js'></script>
+<title>Speed Reader</title>
+<script>
+let SR = {
+  data: {
+    sync: {},
+    key: {},
+    bigData: {}
+  },
+  lib: {}
+}
+</script>
+<link href='https://fonts.googleapis.com/css?family=Niconne' rel='stylesheet' type='text/css'>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script src='lib.js'></script>
+<script src='controls.js'></script>
+<script src='start.js'></script>
+
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<link rel="stylesheet" type="text/css" href="css/light.css">
+</head>
+<body>
+  Like the project? Please <a href='https://ko-fi.com/E1E89L64'>Support Me on Ko-fi</a>
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div style='display: flex; justify-content: center;'>
+  <div class="fb-share-button" data-href="https://lycelia.com/speedreader/" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flycelia.com%2Fspeedreader%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+  <a class="twitter-share-button"
+    href="https://twitter.com/intent/tweet?text=check%20out%20this%20app%20"
+    data-size="large">
+  Tweet</a>
+</div>
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+  <script>
+  /*
+  SR.data.key = key;
+  SR.initMessage = true;
+  let listen = function receiveMessage(event) {
+    if (SR.initMessage) {
+      SR.initMessage = false;
+      try {
+        Object.assign(SR.data, JSON.parse(event.data))
+      } catch (err) {
+        console.log(err)
+      }
+      window.parent.postMessage(JSON.stringify(SR.data), '*');
+      let data = SR.data;
+      let style = Object.assign(document.createElement('link'), {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: `./css/${data.sync.cssPreference || "light"}.css`
+      })
+      if (!data.sync.cssPreference) {
+        window.parent.postMessage(JSON.stringify({
+          key: SR.data.key,
+          data: {
+            cssPreference: 'light'
+          },
+          run: 'assign',
+          target: 'data_sync'
+        }), '*');
+      }
+      document.head.append(style)
+      SR.start()
+    } else {
+      console.log(event.data)
+    }
+
+  }
+  if (window.self !== window.top) {
+    window.addEventListener("message", listen, 0);
+    window.parent.postMessage(JSON.stringify({target:'data_sync', run:'read', key: key}), '*');
+  } else {
+    listen()
+  } */
+  SR.start()
+  </script>
+
+</body>
+</html>
