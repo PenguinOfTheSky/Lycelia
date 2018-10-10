@@ -55,11 +55,11 @@ S.pages.createPage = function(id) {
           </td>
         </tr>
         <tr>
-          <td>subtypes</td>
+          <td>subtypes (comma separated)</td>
           <td><input type='text' name='subtypes' placeholder="News/novel/fanfiction/etc." maxlength='50'></td>
         </tr>
         <tr>
-          <td >Keywords</td>
+          <td >Keywords (comma separated)</td>
           <td><input type='text' name='keywords' placeholder="Fantasy, Antebellum US, Stock Market" maxlength='50'></td>
         </tr>
         <tr>
@@ -100,6 +100,7 @@ S.pages.createPage = function(id) {
       <!--  <tr id='singleFile' style='display:none;'>
         </tr>-->
       </table>
+      <article>Formatting Tip: If using copy/paste option it's recommended that you highlight all text and change to size: normal unless you have specific typography requirements. size: normal makes the text automatically adjust to preferred browser font size for all readers.</article>
       <div id='uploadHint'></div>
       <div id='template' style='margin-top:.5rem;'></div>
       <div style='text-align:center;'>

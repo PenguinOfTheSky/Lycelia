@@ -14,10 +14,11 @@
       cardBounty = true;
     } else {
       bounty *= .5
-      account.gold += bounty;
-      $('#goldDisplay').text(account.gold)
-      if (!game.multiplayer) account.campaigns[game.id] = true
     }
+    account.gold += bounty;
+    $('#goldDisplay').text(account.gold)
+    if (!game.multiplayer) account.campaigns.push(game.id)
+    C.events.save()
     let msg = `
     <style>
       .winSelectionCards {
@@ -51,6 +52,7 @@
           account.gold += bounty; //double bounty?
           $('#goldDisplay').text(account.gold)
           account.cards.push(card)
+          C.events.save()
           D.find('#winBounty').innerHTML = `Card has been added to your library. Check the library tab to see what cards you have and add them to your deck or create a new one.`
         },450)
       }

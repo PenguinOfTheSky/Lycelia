@@ -2,6 +2,7 @@ S.js.loadIframe = function() {
   post('/store/getPageJSON', S.data.id, function(json) {
     if (json) {
       json = JSON.parse(json)
+      document.title = "Lycelia | " + json.title
       //S.data.pageJson = json
       json['@type'] = 'article'
       json['@context'] = "http://schema.org"
@@ -154,8 +155,9 @@ S.js.loadIframe = function() {
               }
             }
           })
+
           let comments = D.make('button', {
-            innerText: 'Comments',
+            innerText: `Comments (${S.search[id].comments||0})` ,
             className: 'btn btnInfo',
             'style': "margin-left: .2rem;",
             onclick: function() {
@@ -205,7 +207,7 @@ S.js.loadIframe = function() {
                 })
                 let full = false;
                 let fullscreen = D.make("button", {
-                  style: 'z-index:1;position:absolute;right:0;background-image:url("iconLib/fullscreen.svg");background-size:contain;width:1.3rem;height:1.3rem;opacity:.3;transition: opacity .25s ease-out;',
+                  style: 'z-index:1;position:absolute;right:0;background-image:url("/iconLib/fullscreen.svg");background-size:contain;width:1.3rem;height:1.3rem;opacity:.3;transition: opacity .25s ease-out;',
                   onmouseenter: function() {
                     this.style.opacity = 1
                   },
@@ -214,7 +216,7 @@ S.js.loadIframe = function() {
                   },
                   onclick: function() {
                     if (full == false ) {
-                      this.style['background-image'] = "url('iconLib/compress.svg')"
+                      this.style['background-image'] = "url('/iconLib/compress.svg')"
                       Object.assign(iframeContainer.style, {
                         width: '100vw',
                         height: '100vh',
@@ -235,7 +237,7 @@ S.js.loadIframe = function() {
                       full = true;
                     } else {
                       full = false
-                      this.style['background-image'] = "url('iconLib/fullscreen.svg')"
+                      this.style['background-image'] = "url('/iconLib/fullscreen.svg')"
                       Object.assign(iframeContainer.style, {
                         width: '100%',
                         height: '',
@@ -261,7 +263,8 @@ S.js.loadIframe = function() {
                 if (json.author === "Lycelia") {
                   //nosandbox
                 } else {
-                  iframe.sandbox = "allow-scripts allow-forms allow-popups-to-escape-sandbox allow-popups allow-pointer-lock"
+                  iframe.sandbox = "allow-scripts allow-forms "//allow-popups-to-escape-sandbox allow-popups allow-pointer-lock
+                  //testing this, make sure to beta test all.
                 }
 
                 if (D.find('#bottomDiv')) {
@@ -341,6 +344,7 @@ S.js.loadIframe = function() {
             })
             let chapIndex = 0;
             let chapArrayRef = {}
+            console.log(json)
             json.chapters.forEach(function(ele, i) {
               chapIndex++
               chapArrayRef[chapIndex] = ele[0]

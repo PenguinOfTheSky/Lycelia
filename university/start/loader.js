@@ -23,7 +23,9 @@ let scripts = [
       'modules/A1+.js',
       'modules/A50+.js',
       'modules/A100+.js',
-      'modules/A110+.js'
+      'modules/A110+.js',
+      'modules/math/Algebra1+.js',
+      'modules/compsci/html/html1+.js'
     ]
     initScriptsLoaded = 0;
     let scriptsHolder = document.createDocumentFragment()

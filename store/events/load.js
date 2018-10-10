@@ -1,12 +1,15 @@
 S.events.load = function(opts) {
   let {id, chapter, author, comments} = opts
   let address = '?'
-  if (id) address += 'id='+id
+  //if (id) address += 'id='+id
+  if (id) address = '/s/' + id
+  if (id && chapter) address += '?'
   if (chapter) address += '&chapter=' + chapter
   if (author) address += `author=${author}`
   if (comments) address += `comments=${comments}`
   let title = ''
   if (id && S.search && S.search[id]) title = "Lycelia | " + S.search[id].title
+  else title = 'Lycelia'
   history.pushState({}, title, address);
   if (title) document.title = title
   S.data.id = id

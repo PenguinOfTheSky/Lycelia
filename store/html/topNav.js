@@ -11,14 +11,15 @@ S.html.topNav = function() {
       <div>
         <button title='home' ref='home' class='icon fa fa-home'></button>
       </div>
-      <div>
+      <a href='https://lycelia.com/s/d4x' style='color: inherit;'>
         Lycelia
-      </div>
+      </a>
       <form id ='navSearch'>
         <input type='text' name='search' placeholder='search' style='margin-right:.1rem;'>
         <button type='submit' class='btn btnSubmit'><icon class='fa fa-search'></icon></button>
       </form>
       <div>
+       <button ref ='mail' title ='messages / mail' class='icon fa fa-envelope' style=''></button>
         <button ref ='account' title ='account / sign in / create account' class='icon fa fa-user'></button>
         <button ref ='info' title='info' class='icon fa fa-info'></button>
         <button class='icon fa fa-bars' style='display:none;'></button>

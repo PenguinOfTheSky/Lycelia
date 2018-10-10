@@ -67,9 +67,23 @@ S.html.search = function() {
       author.append(D.make('span', {
         innerText: S.search[arr[x]].title,
         style: 'font-size:1.3rem;font-weight:600'
-      }), D.make('span', {
-        innerText: ` by ${S.search[arr[x]].author}`
+      }), D.make('a', {
+        innerText: `by ${S.search[arr[x]].author}`,
+        style: 'margin-left: .5rem;',
+        onclick: function(e) {
+          e.stopPropagation()
+        },
+        href: '/?author='+S.search[arr[x]].author
       }))
+      let comments = D.make('span', {
+        innerText: `${S.search[arr[x]].comments || 0} Comments`,
+        style: 'margin-right:.25rem;',
+        className: 'link',
+        onclick: function(e) {
+          e.stopPropagation()
+          S.events.load({comments: arr[x]})
+        }
+      })
       let lastMod = D.make('span', {
         innerText: `Updated ${(new Date(S.search[arr[x]].modified)).toLocaleDateString()}  \ `,
         style: 'margin-right:.25rem;'
@@ -77,8 +91,13 @@ S.html.search = function() {
       let upDown = D.make('span', {
         innerHTML: `<icon class='fa fa-thumbs-up'>${Math.trunc(S.search[arr[x]].upvotes)}</icon> <icon class='fa fa-thumbs-down'>${Math.trunc(S.search[arr[x]].downvotes)}</icon> `
       })
+      let size = D.make('span', {
+        innerText: ` ${(Math.round(S.search[arr[x]].size/700))}kb `,
+        style: 'margin-right:.25rem;',
+        title: 'filesize'
+      })
       let right = D.make('div')
-      right.append(upDown, lastMod, rating)
+      right.append(comments, size, upDown, lastMod, rating)
       title.append(author, right)
       let terms = D.make('div', {
         className: 'terms'
@@ -95,11 +114,19 @@ S.html.search = function() {
           innerText: ele,
           style: `margin-left:.1rem;`
         })
+        ele = ele.toLowerCase().trim()
         if (ele == 'fanfiction' || ele == 'fanfic') {
           span.style.fontWeight = 700
-          //span.style.backgroundColor = '#DDF'
-        } else if (ele =='Game' || ele == 'game') {
+          span.append(D.make('img', {
+            src: '/iconLib/bookPenguin.svg',
+            className: 'textImg'
+          }))
+        } else if (ele == 'game' || ele == 'games') {
           span.style.fontWeight = 700
+          span.append(D.make('img', {
+            src: '/iconLib/gameController.svg',
+            className: 'textImg'
+          }))
         }
         terms.append(span)
       })
@@ -112,6 +139,44 @@ S.html.search = function() {
             innerText: ele,
             style: `margin-left:.1rem;`
           })
+          ele = ele.toLowerCase().trim()
+          if (ele == 'comedy' || ele == 'humor') {
+            span.style.fontWeight = 700
+            span.append(D.make('img', {
+              src: '/iconLib/smile.svg',
+              className: 'textImg'
+            }))
+          } else if (ele == 'tragedy') {
+            span.style.fontWeight = 700
+            span.append(D.make('img', {
+              src: '/iconLib/sad.svg',
+              className: 'textImg'
+            }))
+          } else if (ele == 'thriller' || ele == 'suspense') {
+            span.style.fontWeight = 700
+            span.append(D.make('img', {
+              src: '/iconLib/surprised.svg',
+              className: 'textImg'
+            }))
+          } else if (ele == 'romance') {
+            span.style.fontWeight = 700
+            span.append(D.make('img', {
+              src: '/iconLib/heart.svg',
+              className: 'textImg'
+            }))
+          } else if (ele == 'horror') {
+            span.style.fontWeight = 700
+            span.append(D.make('img', {
+              src: '/iconLib/horror.svg',
+              className: 'textImg'
+            }))
+          } else if (ele == 'drama') {
+            span.style.fontWeight = 700
+            span.append(D.make('img', {
+              src: '/iconLib/drama.svg',
+              className: 'textImg'
+            }))
+          }
           keywords.append(span)
         })
         terms.append( keywords)

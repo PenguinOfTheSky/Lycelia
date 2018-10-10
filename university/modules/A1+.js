@@ -1,35 +1,6 @@
 Object.assign(Uni.modules, {
-  "A1": {
-    id: "A1",
-    type: "lesson",
-    title: "What is HTML?",
-    category: ['Programming', 'Computer Science'],
-    text: `<b>HTML</b> (Hypertext Markup Language) is a <a href='https://en.wikipedia.org/wiki/Markup_language'>markup language</a>. It's a way of telling web browsers what to display and where. There have been several versions of HTML, but the most recent one is HTML5, and that is version taught in this course.`,
-    license: "",
-    questions: [
-      {
-        type: 'TF',
-        text: "HTML is interpreted by web browsers to help create web pages.",
-        answer: 'T'
-      },
-      {
-        type: 'multiple',
-        text: "Current version of HTML in most widespread use is?",
-        options: ['XHTML', 'HTML5', 'HTML4'],
-        answer: 1
-      }
-    ]
-  },
-  "A2": {
-    id: 'A2',
-    title: 'Introduction to HTML',
-    difficulty: '100',
-    type: 'class',
-    credits: .5,
-    category: ['Programming'],
-    text: "Get started with HTML, the markup language that helps form webpages.",
-    modules: ["A1"]
-  },
+  
+//  "A2": ,
   'A3': {
     id: 'A3',
     title: "Novice HTML5 Programmer",

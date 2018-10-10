@@ -99,7 +99,7 @@ Beta Testers: Knochenmark, Psyperl
   {
     C.events.loadStart = function() {
       localforage.getItem('cardicus', function(err, obj) {
-        if (err || !obj.cards){
+        if (err ||!obj || !obj.cards){
            //console.log(err);
            window.account = {
              "username": 'Hero',

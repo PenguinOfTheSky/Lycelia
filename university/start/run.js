@@ -21,6 +21,7 @@ Uni.run = function() {
     start(1)
   };
   for (let x in Uni.modules) {
+    Uni.modules[x].id = x
     Uni.index[Uni.modules[x].type][x] = true
   }
 }

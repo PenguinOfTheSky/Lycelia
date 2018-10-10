@@ -22,5 +22,5 @@ Uni.render.base = function(id, back) {
   } else {
     console.log('bad')
   }
-
+  if (MathJax) MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 }

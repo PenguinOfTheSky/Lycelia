@@ -2,7 +2,17 @@ Uni.render.lessonQuestions = function(item) {
   let form = D.make('form', {
     style: 'padding: .2rem; box-shadow: 0px 0px .05rem .1rem #112;box-sizing:border-box;',
     autocomplete: 'off',
-    innerHTML: `<h3>Questions:</h3>`,
+    innerHTML: `
+    <style>
+      input[type=radio] {
+        cursor: pointer;
+        width: .8rem;
+        height:.8rem;
+        vertical-align:middle;
+        margin:.1rem;
+      }
+    </style>
+    <h3>Questions:</h3>`,
     onsubmit: function(e) {
       e.preventDefault();
       let solved = 0;
@@ -38,6 +48,7 @@ Uni.render.lessonQuestions = function(item) {
           }
         }
       })
+      D.find('#statusCorrect').innerHTML = solved + '/' + q + ' correct'
       if (solved === q) {
         Uni.userData.completed[item.id] = true
         D.find('#continue').style.transition = '2s all ease-out'
@@ -51,7 +62,8 @@ Uni.render.lessonQuestions = function(item) {
   form.append(qList)
   item.questions.forEach((ele,i) => {
     let block = D.make('li', {
-      id: 'q_' + i
+      id: 'q_' + i,
+      style: 'margin-bottom:.8rem;'
     })
     let question = D.make('div', {
       innerHTML: ele.text
@@ -105,7 +117,7 @@ Uni.render.lessonQuestions = function(item) {
         let input = D.make('input', {
           type: 'radio',
           name: `q_${i}`,
-          style: 'transform: scale(1.4);filter: contrast(150%) drop-shadow(0px 0px 1px black);',
+          style: 'filter: contrast(150%) drop-shadow(0px 0px 1px black);',
           value: x
         })
         label.append(input)
@@ -160,6 +172,18 @@ Uni.render.lessonQuestions = function(item) {
       }
       block.append(table)
     }
+    if (ele.hint) {
+      let hint = D.make('button', {
+        innerHTML: 'see hint',
+        className: 'btnInfo',
+        onclick: function() {
+          this.parentNode.replaceChild(D.make('div', {
+            innerHTML: ele.hint
+          }),this)
+        }
+      })
+      block.append(hint)
+    }
     qList.append(block)
   })
   let footer = D.make('div')
@@ -168,6 +192,12 @@ Uni.render.lessonQuestions = function(item) {
       className: 'btn btnSubmit',
       type: 'submit',
       value: 'Check My Answers'
+    }),
+    D.make('span', {
+      className: '',
+      id:'statusCorrect',
+      value: '',
+      style: 'margin-left:1rem;font-weight:600;'
     })
   )
   form.append(footer)

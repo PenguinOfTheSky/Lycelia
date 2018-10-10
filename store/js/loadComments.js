@@ -10,16 +10,20 @@ S.js.loadComments = function() {
       let renderComment = function(x) {
         try {
           let line = D.make('div', {
-            style: `margin-top:.3rem; box-shadow: 1px 1px .1rem .03rem black;`
+            style: `margin-top:.3rem; box-shadow: 1px 1px .1rem .03rem black;word-break: break-word;`
           })
           let header = D.make("p", {
             innerText: (new Date(+x)).toLocaleString(),
             style: ' margin:0;'
           })
           let author = D.make("span", {
-            innerText: ` ${comments[x].by} said:`,
-            style: 'font-weight:700;'
+
           })
+          author.append(D.make('a', {
+            innerText: `${comments[x].by}`,
+            style: 'font-weight:700; margin-left:1rem;',
+            href: '/?author='+comments[x].by
+          }),' said:')
           header.append(author)
           let text = D.make('p', {
             innerText: comments[x].text,
@@ -38,11 +42,12 @@ S.js.loadComments = function() {
         }
       }
       let addComment = D.make('form', {
-        style: `margin-top:1rem;text-align:center;`,
+        style: `margin:0 auto; margin-top:1rem;text-align:center; max-width:100%; width:35rem;`,
         onsubmit: function(e) {
           e.preventDefault();
           let text = D.find('#text').value//contentWindow.document.querySelector('#textBox').innerText
           if (text.length) {
+            D.find('#text').value = ''
             let pkg = {
               text: text,
               user: S.DB.user,

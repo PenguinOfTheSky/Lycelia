@@ -20,6 +20,12 @@
       var urlParams = new URLSearchParams(window.location.search);
       window.key = JSON.parse(urlParams.get('Lkey'))
       S.data.id = urlParams.get('id')
+      if (location.pathname) {
+        let arr = location.pathname.split('/')
+        if (arr[1] === 's') {
+          S.data.id = arr[2]
+        }
+      }
       S.data.author=urlParams.get('author')
       S.data.comments=urlParams.get('comments')
       S.data.chapter = urlParams.get('chapter')

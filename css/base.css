@@ -41,3 +41,9 @@ select, button, .btn {
 .border0, .border1, .border2, .border3 {
   box-sizing: border-box;
 }
+.textImg {
+  height: 1.05em;
+  vertical-align: middle;
+  margin-left:.1em;
+  margin-right: .1em;
+}

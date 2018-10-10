@@ -13,7 +13,7 @@
   document.head.appendChild(
     Object.assign(document.createElement('link'), {
       id: 'cssPref',
-      href: `css/${S.DB.preferences.css || "light"}.css`,
+      href: `/css/${S.DB.preferences.css || "light"}.css`,
       rel: 'stylesheet',
       type: 'text/css'
     })

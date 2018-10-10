@@ -1,6 +1,12 @@
 ## todo:
 
 ## patch notes:
+* Oct 10th, 2018 - mail system engaged. Lycelia link in top nav.  
+* Oct 4th, 2018 - comment number now updates realtime via Search.  
+* Oct 1, 2018 - comments author links. fixed comment not deleting when pushing. Fixed front page recent/popular links.
+
+* Sept 30th, 2018 - will be updating this more frequently from now on. Added formatting tips on create page page. Added recent/popular front page -- T.R.
+
 * Sept 2nd, 2018 - Added Radius Raid game, added site to github -- T.R.
 
 * vA.27 - Author page, awards.

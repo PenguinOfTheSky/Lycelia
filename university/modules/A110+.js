@@ -157,7 +157,6 @@ Object.assign(Uni.modules, {
     ]
   },
   "A114": {
-    "id": "A114",
     "type": 'lesson',
     title: "Practice",
     category: ['Language'],
